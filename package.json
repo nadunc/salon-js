@@ -1,0 +1,30 @@
+{
+  "name": "salon-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nadunc/salon-js.git"
+  },
+  "author": "Nadun Chamikara",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nadunc/salon-js/issues"
+  },
+  "homepage": "https://github.com/nadunc/salon-js#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.8"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.42.0"
+  }
+}

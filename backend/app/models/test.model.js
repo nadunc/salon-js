@@ -2,13 +2,23 @@ const Sequelize = require('sequelize');
 var sequelize = require('../database');
 
 const TestModel = sequelize.define('test', {
-    email: {
-        type: Sequelize.STRING
+    firstname: {
+        type: Sequelize.STRING,
+        validate: {
+            isAlpha: {
+                msg: "First Name must only contain letters."
+            }
+        }
     },
-    password: {
-        type: Sequelize.STRING
+    lastname: {
+        type: Sequelize.STRING,
+        validate: {
+            isAlpha: {
+                msg: "Last Name must only contain letters."
+            }
+        }
     }
-});
+}, {underscored: true,});
 
 // // force: true will drop the table if it already exists
 // TestModel.sync({force: true}).then(() => {

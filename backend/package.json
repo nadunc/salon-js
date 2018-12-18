@@ -21,10 +21,15 @@
     "nodemon": "^1.18.8"
   },
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "joi": "^14.3.0",
+    "jsonwebtoken": "^8.4.0",
     "morgan": "^1.9.1",
     "mysql2": "^1.6.4",
-    "sequelize": "^4.42.0"
+    "passport": "^0.4.0",
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0"
   }
 }

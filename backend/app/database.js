@@ -11,6 +11,7 @@ const sequelize = new Sequelize('node_sql_test', 'root', '', {
 
 
 
+
 sequelize.authenticate()
     .then(() => {
         console.log('Connection has been established successfully.');

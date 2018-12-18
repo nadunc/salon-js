@@ -23,8 +23,6 @@ exports.create = (req, res) => {
         lastname: temp.lastname
     };
 
-// console.log("Test", test);
-// return;
     TestModel.create(test).then((test) => {
 
         // Transaction has been committed

@@ -2,10 +2,10 @@ const Sequelize = require('sequelize');
 var sequelize = require('../database');
 
 const UserRoleModel = sequelize.define('user_role', {
-    id:{
-        type: Sequelize.INTEGER,
-        primaryKey: true
-    },
+    // id:{
+    //     type: Sequelize.INTEGER,
+    //     primaryKey: true
+    // },
     name: {
         type: Sequelize.STRING
     }

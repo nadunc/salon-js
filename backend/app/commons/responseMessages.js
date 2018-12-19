@@ -3,12 +3,15 @@ module.exports = {
     // Success
     STYLIST_LIST_RETRIEVE_SUCCESS : 'Stylists List Successfully Retrieved.',
     SALON_LIST_RETRIEVE_SUCCESS : 'Salons List Successfully Retrieved.',
+    STYLISTS_AVAILABLE_SLOTS_FETCH_SUCCESS : 'Successfully retrieved available time slots.',
 
     STYLIST_RETRIEVE_SUCCESS : 'Stylist Successfully Retrieved.',
     SALON_RETRIEVE_SUCCESS : 'Salon Successfully Retrieved.',
 
     STYLIST_ADD_SUCCESS : 'Stylist Successfully Registered.',
     SALON_ADD_SUCCESS : 'Salon Successfully Registered.',
+    TIMESLOT_ADD_SUCCESS : 'Successfully added available time slot.',
+    TIMESLOT_IS_NOT_AVAILABLE : 'Failed to add time slot. Time slot is already filled.',
 
 
     USER_PASSWORD_RESET_CODE_SENT : 'Password reset link sent. Please check you mailbox.',
@@ -18,6 +21,8 @@ module.exports = {
     INVALID_PASSWORD_RESET_LINK : 'Invalid password reset link.',
 
     USER_PASSWORD_RESET_SUCCESS : 'Password reset success.',
+
+
 
     // // Failed
     // STYLIST_LIST_RETRIEVE_FAILED : 'Failed to Retrieve Stylists.',

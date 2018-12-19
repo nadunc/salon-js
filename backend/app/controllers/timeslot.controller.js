@@ -17,51 +17,33 @@ const moment = require('moment');
  */
 exports.findAvailableStylistsByTimeRange = (req, res) => {
 
-    let from = req.body.from;
-    let to = req.body.to;
+    let date = req.body.date;
+    let start = req.body.start;
+    let end = req.body.end;
 
-    // from = moment(from).local().format();
-    from = moment.parseZone(from).local().format();
-    // to = moment(to).format();
-    to = moment.parseZone(to).local().format();
-
-
-    console.log(from)
 
     // TimeSlotModel.findAll({include:[{ model: StylistModel, where: { active: true }}]}).then(timeslots => {
-    TimeSlotModel.findAll({where:{from:{[Op.lte]: from}, to:{[Op.gte]:to}}, include:[{ model: StylistModel}]}).then(timeslots => {
+    TimeSlotModel.findAll({
+        where: {date: date, start: {[Op.lte]: start}, end: {[Op.gte]: end}},
+        include: [{model: StylistModel}]
+    }).then(timeslots => {
         res.json(commonMethods.createResponse(true, timeslots, responseMessages.STYLIST_LIST_RETRIEVE_SUCCESS));
-
     }).catch(err => {
         res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
     });
 };
 
 
-/*
-* Find available time slots of a stylist by time range.
-* Available time slot(s) of stylist must in between searching time slot
-* Ex:- available_time 01:00:00 - 05:00:00 /  searching_slot 00:00:00 - 08:00:00
- */
-exports.findStylistAvailableSlotsByTimeRange = (req, res) => {
+exports.findStylistsAvailableSlotsByDate = (req, res) => {
 
-    let from = req.body.from;
-    let to = req.body.to;
-
-    // from = moment(from).local().format();
-    from = moment.parseZone(from).local().format();
-    // to = moment(to).format();
-    to = moment.parseZone(to).local().format();
-
-    console.log(from)
+    let date = req.body.date;
 
     // TODO : get logged stylists id
     let stylistId = 1;
     /***************************************************************************************************************************************************/
 
-    // TimeSlotModel.findAll({include:[{ model: StylistModel, where: { active: true }}]}).then(timeslots => {
-    TimeSlotModel.findAll({where:{stylist_id:stylistId, from:{[Op.gte]: from}, to:{[Op.lte]:to}} }).then(timeslots => {
-        res.json(commonMethods.createResponse(true, timeslots, responseMessages.STYLIST_LIST_RETRIEVE_SUCCESS));
+    TimeSlotModel.findAll({where: {stylist_id: stylistId, date: date}}).then(timeslots => {
+        res.json(commonMethods.createResponse(true, timeslots, responseMessages.STYLISTS_AVAILABLE_SLOTS_FETCH_SUCCESS));
 
     }).catch(err => {
         res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
@@ -69,6 +51,53 @@ exports.findStylistAvailableSlotsByTimeRange = (req, res) => {
 };
 
 
-exports.createTimeSlots = (req, res) => {
+exports.create = (req, res) => {
+
+    let date = req.body.date;
+    let start = req.body.start;
+    let end = req.body.end;
+
+    // TODO
+    let stylistId = 1;
+
+    let sql = "SELECT COUNT(*) as count FROM timeslots " +
+        "WHERE stylist_id=:stylist_id AND date=:date " +
+        "AND ((start>=:start AND (end>=:end AND start<:end)) " +
+        "OR (start>=:start AND (end<=:end)) " +
+        "OR (start<=:start AND (end>=:end)) " +
+        "OR (start<=:start AND (end<=:end AND end>:start)))";
+
+    sequelize.query(sql,
+        {
+            replacements: {stylist_id: stylistId, date: date, start: start, end: end},
+            raw: true,
+            type: sequelize.QueryTypes.SELECT
+        })
+        .then((result) => {
+            // console.log(result);
+            let count = result[0].count;
+
+            if (count === 0) {
+
+                let timeslot = {
+                    date: date,
+                    start: start,
+                    end: end,
+                    stylist_id: stylistId
+                };
+
+                TimeSlotModel.create(timeslot).then((timeslot) => {
+                    res.json(commonMethods.createResponse(true, timeslot, responseMessages.TIMESLOT_ADD_SUCCESS));
+                }).catch((err) => {
+                    res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+                });
+            } else {
+                res.json(commonMethods.createResponse(false, null, responseMessages.TIMESLOT_IS_NOT_AVAILABLE));
+            }
+        })
+        .catch((err) => {
+            res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+
+        });
 
 };

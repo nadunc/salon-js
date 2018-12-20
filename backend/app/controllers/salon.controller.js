@@ -1,6 +1,6 @@
 var SalonModel = require('../models/salon.model');
 var UserModel = require('../models/user.model');
-var commonMethods = require('../commons/commonmethods');
+var commonMethods = require('../commons/commonMethods');
 var responseMessages = require('../commons/responseMessages');
 const constants = require('../commons/constants');
 

@@ -1,0 +1,35 @@
+@import "../colors";
+
+.stylist-card-price{
+  color: $color-green;
+  font-size: 25px;
+  text-align: center;
+}
+
+.stylist-card-price-label{
+  color: $color-grey;
+  font-size: 13px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.stylist-card-rating{
+  //padding-top: 25px;
+  padding-top: 15px;
+}
+.stylist-card-rating-value{
+  font-size: 20px;
+  padding-right: 7px;
+}
+.stylist-card-rating-star{
+  margin-top: -10px;
+  width: 25px;
+}
+
+.stylist-card-name{
+  font-size: 25px;
+}
+
+.stylist-card-bio{
+  padding-top: 20px;
+}

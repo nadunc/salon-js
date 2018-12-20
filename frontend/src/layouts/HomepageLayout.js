@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 import {
     Button,
     Container,
-    Divider,
     Grid,
     Header,
     Icon,
@@ -14,7 +13,6 @@ import {
     Segment,
     Sidebar,
     Visibility,
-    Input,
     Form
 } from 'semantic-ui-react'
 

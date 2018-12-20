@@ -1,5 +1,5 @@
 var TestModel = require('../models/test.model');
-var commonMethods = require('../commons/commonmethods');
+var commonMethods = require('../commons/commonMethods');
 
 
 exports.findAll = (req, res, next) => {

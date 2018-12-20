@@ -1,5 +1,5 @@
 const UserModel = require('../models/user.model');
-const commonMethods = require('../commons/commonmethods');
+const commonMethods = require('../commons/commonMethods');
 const constants = require('../commons/constants');
 const responseMessages = require('../commons/responseMessages');
 const jwt = require('jsonwebtoken');

@@ -1,6 +1,6 @@
 var TimeSlotModel = require('../models/timeslot.model');
 var StylistModel = require('../models/stylist.model');
-var commonMethods = require('../commons/commonmethods');
+var commonMethods = require('../commons/commonMethods');
 var responseMessages = require('../commons/responseMessages');
 const constants = require('../commons/constants');
 
@@ -20,6 +20,10 @@ exports.findAvailableStylistsByTimeRange = (req, res) => {
     let date = req.body.date;
     let start = req.body.start;
     let end = req.body.end;
+
+    // TODO : rating & price
+    // let price = req.body.price;
+    // let rating = req.body.rating;
 
 
     // TimeSlotModel.findAll({include:[{ model: StylistModel, where: { active: true }}]}).then(timeslots => {

@@ -4,6 +4,8 @@ module.exports = {
     STYLIST_LIST_RETRIEVE_SUCCESS : 'Stylists List Successfully Retrieved.',
     SALON_LIST_RETRIEVE_SUCCESS : 'Salons List Successfully Retrieved.',
     STYLISTS_AVAILABLE_SLOTS_FETCH_SUCCESS : 'Successfully retrieved available time slots.',
+    EXPERIENCE_LIST_RETRIEVE_SUCCESS : 'Experience List Successfully Retrieved.',
+
 
     STYLIST_RETRIEVE_SUCCESS : 'Stylist Successfully Retrieved.',
     SALON_RETRIEVE_SUCCESS : 'Salon Successfully Retrieved.',

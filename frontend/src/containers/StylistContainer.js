@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {Button, Container, Menu, Card} from "semantic-ui-react";
-import Stylist from '../components/Stylist'
+import {Card} from "semantic-ui-react";
+import StylistCard from '../components/StylistCard'
 
 
 class StylistContainer extends Component {
@@ -13,13 +13,13 @@ class StylistContainer extends Component {
     }
 
     render() {
-        let stylists = this.props.stylists.map((stylist, key)=>{
-            return <Stylist stylist={stylist}/>
+        let timeslots = this.props.timeslots.map((timeslot, key)=>{
+            return <StylistCard timeslot={timeslot} key={key}/>
         });
 
         return (
             <Card.Group>
-                {stylists}
+                {timeslots}
             </Card.Group>
 
 

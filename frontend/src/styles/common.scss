@@ -3,11 +3,18 @@
 a{
   color: $color-green;
 }
-
+label{
+  font-weight: bold;
+}
 .text-center{
   text-align: center;
 }
-
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right;
+}
 .page-h1{
   margin-bottom: 50px;
 }

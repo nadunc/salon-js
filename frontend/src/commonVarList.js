@@ -10,10 +10,19 @@ const CLIENT_ROUTES = {
     SEARCH: '/search',
     FAQ: '/faq',
     TERMS: '/terms',
+    STYLIST: '/stylist/:id',
+    DASHBOARD: '/dashboard',
+    DASHBOARD_HOME: '/dashboard/home',
+    DASHBOARD_CALENDAR: '/dashboard/calendar',
+    DASHBOARD_PORTFOLIO: '/dashboard/portfolio',
+    DASHBOARD_BOOKINGS: '/dashboard/bookings',
+    DASHBOARD_SETTINGS: '/dashboard/settings',
+    DASHBOARD_PREFERENCES: '/dashboard/preferences',
+    DASHBOARD_CHANGE_PASSWORD: '/dashboard/change-password',
 };
 
 const SERVER_ROUTES = {
-    ROOT: 'http://localhost:3000',
+    ROOT: 'http://localhost:5000',
     GET_AVAILABLE_STYLISTS:'/timeslots/stylists',
     GET_EXPERIENCES:'/experience'
 };

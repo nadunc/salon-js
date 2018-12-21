@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import {Button, Container, Menu, Icon} from "semantic-ui-react";
+import {Button, Container, Menu} from "semantic-ui-react";
 
 import {CLIENT_ROUTES} from '../commonVarList'
 
@@ -22,7 +22,7 @@ class MainMenu extends Component {
                     {/*</Menu.Item>*/}
                     <Menu.Item position='right'>
                         {/*<Button inverted basic icon='search' as={Link} to={CLIENT_ROUTES.SEARCH} style={{marginRight: '2em'}}/>*/}
-                        <Button color="black" icon='search' as={Link} to={CLIENT_ROUTES.SEARCH} style={{marginRight: '2em'}}/>
+                        <Button circular color="black" icon='search' as={Link} to={CLIENT_ROUTES.SEARCH} style={{marginRight: '2em'}}/>
                         {/*<Icon inverted link={CLIENT_ROUTES.SEARCH} name='search' style={{marginLeft: '0.5em', marginRight: '2em'}}/>*/}
                             <Button size='mini' as={Link} to={CLIENT_ROUTES.SIGN_IN} style={{marginLeft: '0.5em'}}>
                                 Sign In

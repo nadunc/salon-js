@@ -3,7 +3,7 @@ import {Grid, Form, Divider, Button} from "semantic-ui-react";
 import { Link } from 'react-router-dom'
 import { CLIENT_ROUTES } from '../../commonVarList'
 
-class DashboardPortfolio extends Component {
+class SalonContentSalonProfile extends Component {
 
 
     render() {
@@ -12,9 +12,9 @@ class DashboardPortfolio extends Component {
         return (
             <div>
                 <h1 className='page-h1'>
-                    Portfolio
+                    Salon Profile
 
-                    <Button href={CLIENT_ROUTES.STYLIST+'/'+userId}>View Portfolio</Button>
+                    {/*<Button basic size="mini" className='dashboard-portfolio-view-btn' href={CLIENT_ROUTES.STYLIST.replace(':id', userId)} content='View Portfolio'/>*/}
                 </h1>
 
                 <Divider/>
@@ -53,10 +53,10 @@ class DashboardPortfolio extends Component {
                         <Grid>
                             <Grid.Row>
                                 <Grid.Column width={5}>
-                                    <label>Experience</label>
+                                    <label>Phone</label>
                                 </Grid.Column>
                                 <Grid.Column width={6}>
-                                    <input placeholder='Experience'/>
+                                    <input placeholder='Phone'/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
@@ -67,10 +67,10 @@ class DashboardPortfolio extends Component {
                         <Grid>
                             <Grid.Row>
                                 <Grid.Column width={5}>
-                                    <label>Bio</label>
+                                    <label>Address</label>
                                 </Grid.Column>
                                 <Grid.Column width={6}>
-                                    <textarea placeholder='Bio'/>
+                                    <textarea placeholder='Address'/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
@@ -80,23 +80,10 @@ class DashboardPortfolio extends Component {
                         <Grid>
                             <Grid.Row>
                                 <Grid.Column width={5}>
-                                    <label>Hourly Price as a Stylist</label>
+                                    <label>Description</label>
                                 </Grid.Column>
                                 <Grid.Column width={6}>
-                                    <input placeholder='Hourly price as a stylist' type='number'/>
-                                </Grid.Column>
-                            </Grid.Row>
-                        </Grid>
-                    </Form.Field>
-
-                    <Form.Field>
-                        <Grid>
-                            <Grid.Row>
-                                <Grid.Column width={5}>
-                                    <label>Hourly Price as an Educator</label>
-                                </Grid.Column>
-                                <Grid.Column width={6}>
-                                    <input placeholder='Hourly price as an educator' type='number'/>
+                                    <textarea placeholder='Description'/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
@@ -106,7 +93,7 @@ class DashboardPortfolio extends Component {
                         <Grid.Row>
                             <Grid.Column width={5}/>
                             <Grid.Column width={6}>
-                                <Button color='green' type='submit'>Save Settings</Button>
+                                <Button color='green' type='submit'>Save Profile Details</Button>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
@@ -117,4 +104,4 @@ class DashboardPortfolio extends Component {
     };
 }
 
-export default DashboardPortfolio;
+export default SalonContentSalonProfile;

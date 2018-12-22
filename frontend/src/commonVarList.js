@@ -19,6 +19,9 @@ const CLIENT_ROUTES = {
     DASHBOARD_SETTINGS: '/dashboard/settings',
     DASHBOARD_PREFERENCES: '/dashboard/preferences',
     DASHBOARD_CHANGE_PASSWORD: '/dashboard/change-password',
+
+    DASHBOARD_PROFILE: '/dashboard/profile',
+
 };
 
 const SERVER_ROUTES = {

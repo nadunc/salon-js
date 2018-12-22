@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {Grid, Form, Divider, Checkbox, Button, Segment} from "semantic-ui-react";
+import {Grid, Form, Divider, Checkbox, Button} from "semantic-ui-react";
 
-class DashboardSettings extends Component {
+class StylistContentSettings extends Component {
 
 
     render() {
@@ -96,4 +96,4 @@ class DashboardSettings extends Component {
     };
 }
 
-export default DashboardSettings;
+export default StylistContentSettings;

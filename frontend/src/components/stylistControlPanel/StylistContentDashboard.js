@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Grid, Statistic, Icon, Segment, Divider} from "semantic-ui-react";
 
-class DashboardHome extends Component {
+class StylistContentDashboard extends Component {
 
 
     render() {
@@ -63,4 +63,4 @@ class DashboardHome extends Component {
     };
 }
 
-export default DashboardHome;
+export default StylistContentDashboard;

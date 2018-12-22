@@ -4,24 +4,93 @@ import {Container, Grid, Image} from 'semantic-ui-react'
 import {CLIENT_ROUTES} from "../commonVarList";
 
 import DashboardSideMenu from '../components/DashboardSideMenu';
-import Review from '../components/Review';
 import Error404 from '../components/Error404';
 import MainMenu from '../components/MainMenu';
 
-import DashboardHome from '../components/stylistDashboard/DashboardHome';
-import DashboardChangePassword from '../components/stylistDashboard/DashboardChangePassword';
-import DashboardPreferences from '../components/stylistDashboard/DashboardPreferences';
-import DashboardSettings from '../components/stylistDashboard/DashboardSettings';
-import DashboardBookings from '../components/stylistDashboard/DashboardBookings';
-import DashboardPortfolio from '../components/stylistDashboard/DashboardPortfolio';
-import DashboardCalendar from '../components/stylistDashboard/DashboardCalendar';
+import StylistContentDashboard from '../components/stylistControlPanel/StylistContentDashboard';
+import StylistContentChangePassword from '../components/stylistControlPanel/StylistContentChangePassword';
+import StylistContentPreferences from '../components/stylistControlPanel/StylistContentPreferences';
+import StylistContentSettings from '../components/stylistControlPanel/StylistContentSettings';
+import StylistContentBookings from '../components/stylistControlPanel/StylistContentBookings';
+import StylistContentPortfolio from '../components/stylistControlPanel/StylistContentPortfolio';
+import StylistContentCalendar from '../components/stylistControlPanel/StylistContentCalendar';
+
+
+import SalonContentDashboard from '../components/salonControlPanel/SalonContentDashboard';
+import SalonContentSalonProfile from '../components/salonControlPanel/SalonContentSalonProfile';
+import SalonContentBookings from '../components/salonControlPanel/SalonContentBookings';
+import SalonContentSettings from '../components/salonControlPanel/SalonContentSettings';
+import SalonContentChangePassword from '../components/salonControlPanel/SalonContentChangePassword';
 
 
 
 class DashboardPageLayout extends Component {
 
+    state = {
+        userRole: 'stylist',
+        // userRole: 'salon',
+        // userRole: 'admin'
+    }
+
+    getRoutes() {
+        if (this.state.userRole === 'stylist') {
+            return (
+                <Switch>
+                    <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} component={StylistContentDashboard}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} component={StylistContentCalendar}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_PORTFOLIO} component={StylistContentPortfolio}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} component={StylistContentBookings}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} component={StylistContentSettings}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} component={StylistContentPreferences}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} component={StylistContentChangePassword}/>
+                    <Route path="*" component={Error404}/>
+                </Switch>
+            );
+        } else if (this.state.userRole === 'salon') {
+            return (
+                <Switch>
+                    <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} component={SalonContentDashboard}/>
+                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} component={DashboardCalendar}/>*/}
+                    <Route path={CLIENT_ROUTES.DASHBOARD_PROFILE} component={SalonContentSalonProfile}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} component={SalonContentBookings}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} component={SalonContentSettings}/>
+                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} component={DashboardPreferences}/>*/}
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} component={SalonContentChangePassword}/>
+                    <Route path="*" component={Error404}/>
+                </Switch>
+            );
+        } else if (this.state.userRole === 'admin') {
+            return (
+                <Switch>
+                    {/*<Route exact path={CLIENT_ROUTES.DASHBOARD}*/}
+                    {/*render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>*/}
+                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_HOME} component={DashboardHome}/>*/}
+                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} component={DashboardCalendar}/>*/}
+                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_PORTFOLIO} component={DashboardPortfolio}/>*/}
+                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} component={DashboardBookings}/>*/}
+                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} component={DashboardSettings}/>*/}
+                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} component={DashboardPreferences}/>*/}
+                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} component={DashboardChangePassword}/>*/}
+                    <Route path="*" component={Error404}/>
+                </Switch>
+            );
+        } else {
+            return (
+                <Switch>
+                    <Route path="*" component={Error404}/>
+                </Switch>
+            );
+        }
+
+    }
 
     render() {
+
+
+        let routes = this.getRoutes();
+
 
         return (
             <div>
@@ -32,27 +101,16 @@ class DashboardPageLayout extends Component {
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={3}>
-                                <Image size='small' circular centered className='text-center dashboard-sidebar-image' src='/images/user_placeholder.jpg'/>
+                                <Image size='small' circular centered className='text-center dashboard-sidebar-image'
+                                       src='/images/user_placeholder.jpg'/>
                                 <p className='text-center dashboard-sidebar-name'>Nadun Chamikara</p>
-                                <DashboardSideMenu/>
+                                <DashboardSideMenu userRole={this.state.userRole}/>
                             </Grid.Column>
                             <Grid.Column width={2}>
                             </Grid.Column>
                             <Grid.Column width={11}>
 
-
-                                <Switch>
-                                    <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME} />)}/>
-                                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} component={DashboardHome}/>
-                                    <Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} component={DashboardCalendar}/>
-                                    <Route path={CLIENT_ROUTES.DASHBOARD_PORTFOLIO} component={DashboardPortfolio}/>
-                                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} component={DashboardBookings}/>
-                                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} component={DashboardSettings}/>
-                                    <Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} component={DashboardPreferences}/>
-                                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} component={DashboardChangePassword}/>
-                                    <Route path="*" component={Error404}/>
-                                </Switch>
-
+                                {routes}
 
                             </Grid.Column>
                         </Grid.Row>

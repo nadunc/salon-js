@@ -32,6 +32,7 @@ const dropdownValuesFromTimes = [
     {key: '22:00:00', text: '10 PM', value: '22:00:00'},
     {key: '23:00:00', text: '11 PM', value: '23:00:00'}
 ]
+
 const dropdownValuesToTimes = [
     {key: '01:00:00', text: '01 AM', value: '01:00:00'},
     {key: '02:00:00', text: '02 AM', value: '02:00:00'},

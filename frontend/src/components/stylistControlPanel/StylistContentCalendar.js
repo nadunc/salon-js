@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import {Grid, Statistic, Icon, Segment, Divider} from "semantic-ui-react";
 
-class DashboardBookings extends Component {
+class StylistContentCalendar extends Component {
 
 
     render() {
 
         return (
             <div>
-                <h1 className='page-h1'>Bookings</h1>
+                <h1 className='page-h1'>Calendar</h1>
 
                 <Divider/>
                 <div className='dashboard-content-top-margin'/>
@@ -17,4 +17,4 @@ class DashboardBookings extends Component {
     };
 }
 
-export default DashboardBookings;
+export default StylistContentCalendar;

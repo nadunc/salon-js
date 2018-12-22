@@ -55,13 +55,14 @@ SalonModel.belongsTo(UserModel);
 
 
 
-// // force: true will drop the table if it already exists
+// force: true will drop the table if it already exists
 // SalonModel.sync({force: true}).then(() => {
-// //     // return StylistModel.create({
-// //     //     user_id:1,
-// //     //     experience_id:1
-// //     // });
-// });
+SalonModel.sync().then(() => {
+//     // return StylistModel.create({
+//     //     user_id:1,
+//     //     experience_id:1
+//     // });
+});
 
 
 

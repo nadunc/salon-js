@@ -75,13 +75,14 @@ StylistModel.belongsTo(UserModel);
 StylistModel.belongsTo(ExperienceModel);
 
 
-// // force: true will drop the table if it already exists
+// force: true will drop the table if it already exists
 // StylistModel.sync({force: true}).then(() => {
-//     // return StylistModel.create({
-//     //     user_id:1,
-//     //     experience_id:1
-//     // });
-// });
+StylistModel.sync().then(() => {
+    // return StylistModel.create({
+    //     user_id:1,
+    //     experience_id:1
+    // });
+});
 
 
 module.exports = StylistModel;

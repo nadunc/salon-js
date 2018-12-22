@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Form, Button, Grid, Divider, Checkbox} from "semantic-ui-react";
 
-class DashboardChangePassword extends Component {
+class StylistContentChangePassword extends Component {
 
 
     render() {
@@ -69,4 +69,4 @@ class DashboardChangePassword extends Component {
     };
 }
 
-export default DashboardChangePassword;
+export default StylistContentChangePassword;

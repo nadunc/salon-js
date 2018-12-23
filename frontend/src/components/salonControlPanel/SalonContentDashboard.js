@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Grid, Statistic, Icon, Segment, Divider} from "semantic-ui-react";
 
-class DashboardHome extends Component {
+class SalonContentDashboard extends Component {
 
 
     render() {
@@ -44,17 +44,8 @@ class DashboardHome extends Component {
                             </Segment>
                         </Grid.Column>
                         <Grid.Column width={2}/>
-                        {/*<Grid.Column width={7}>*/}
-                            {/*<Segment>*/}
-                                {/*<Statistic>*/}
-                                    {/*<Statistic.Value>*/}
-                                        {/*<span>4.8 </span>*/}
-                                        {/*<Icon name='star' color="yellow"/>*/}
-                                    {/*</Statistic.Value>*/}
-                                    {/*<Statistic.Label className="dashboard-statistic-label">Average Rating</Statistic.Label>*/}
-                                {/*</Statistic>*/}
-                            {/*</Segment>*/}
-                        {/*</Grid.Column>*/}
+                        <Grid.Column width={7}/>
+
                     </Grid.Row>
                 </Grid>
 
@@ -63,4 +54,4 @@ class DashboardHome extends Component {
     };
 }
 
-export default DashboardHome;
+export default SalonContentDashboard;

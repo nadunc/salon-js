@@ -7,6 +7,7 @@ import DashboardSideMenu from '../components/DashboardSideMenu';
 import Error404 from '../components/Error404';
 import MainMenu from '../components/MainMenu';
 
+
 import StylistContentDashboard from '../components/stylistControlPanel/StylistContentDashboard';
 import StylistContentChangePassword from '../components/stylistControlPanel/StylistContentChangePassword';
 import StylistContentPreferences from '../components/stylistControlPanel/StylistContentPreferences';
@@ -23,13 +24,20 @@ import SalonContentSettings from '../components/salonControlPanel/SalonContentSe
 import SalonContentChangePassword from '../components/salonControlPanel/SalonContentChangePassword';
 
 
+import AdminContentDashboard from '../components/adminControlPanel/AdminContentDashboard';
+import AdminContentUsers from '../components/adminControlPanel/AdminContentUsers';
+import AdminContentBookings from '../components/adminControlPanel/AdminContentBookings';
+import AdminContentSettings from '../components/adminControlPanel/AdminContentSettings';
+import AdminContentChangePassword from '../components/adminControlPanel/AdminContentChangePassword';
+
+
 
 class DashboardPageLayout extends Component {
 
     state = {
-        userRole: 'stylist',
+        // userRole: 'stylist',
         // userRole: 'salon',
-        // userRole: 'admin'
+        userRole: 'admin'
     }
 
     getRoutes() {
@@ -52,11 +60,9 @@ class DashboardPageLayout extends Component {
                 <Switch>
                     <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
                     <Route path={CLIENT_ROUTES.DASHBOARD_HOME} component={SalonContentDashboard}/>
-                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} component={DashboardCalendar}/>*/}
                     <Route path={CLIENT_ROUTES.DASHBOARD_PROFILE} component={SalonContentSalonProfile}/>
                     <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} component={SalonContentBookings}/>
                     <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} component={SalonContentSettings}/>
-                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} component={DashboardPreferences}/>*/}
                     <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} component={SalonContentChangePassword}/>
                     <Route path="*" component={Error404}/>
                 </Switch>
@@ -64,15 +70,12 @@ class DashboardPageLayout extends Component {
         } else if (this.state.userRole === 'admin') {
             return (
                 <Switch>
-                    {/*<Route exact path={CLIENT_ROUTES.DASHBOARD}*/}
-                    {/*render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>*/}
-                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_HOME} component={DashboardHome}/>*/}
-                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} component={DashboardCalendar}/>*/}
-                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_PORTFOLIO} component={DashboardPortfolio}/>*/}
-                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} component={DashboardBookings}/>*/}
-                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} component={DashboardSettings}/>*/}
-                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} component={DashboardPreferences}/>*/}
-                    {/*<Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} component={DashboardChangePassword}/>*/}
+                    <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} component={AdminContentDashboard}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_USERS} component={AdminContentUsers}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} component={AdminContentBookings}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} component={AdminContentSettings}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} component={AdminContentChangePassword}/>
                     <Route path="*" component={Error404}/>
                 </Switch>
             );

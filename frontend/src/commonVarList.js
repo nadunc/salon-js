@@ -21,6 +21,7 @@ const CLIENT_ROUTES = {
     DASHBOARD_CHANGE_PASSWORD: '/dashboard/change-password',
 
     DASHBOARD_PROFILE: '/dashboard/profile',
+    DASHBOARD_USERS: '/dashboard/users',
 
 };
 

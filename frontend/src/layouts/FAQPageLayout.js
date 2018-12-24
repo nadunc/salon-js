@@ -4,7 +4,7 @@ import {Container, Accordion, Icon} from 'semantic-ui-react'
 
 
 
-class SearchPageLayout extends Component {
+class FAQPageLayout extends Component {
 
     state = { activeIndex: 0 }
 
@@ -156,4 +156,4 @@ class SearchPageLayout extends Component {
 
 }
 
-export default SearchPageLayout;
+export default FAQPageLayout;

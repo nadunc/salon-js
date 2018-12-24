@@ -1,19 +1,24 @@
 import React, {Component} from 'react'
+import { Redirect } from 'react-router-dom'
 import MainMenu from '../components/MainMenu';
 import {Container, Form, Checkbox, Button, Card, Grid} from 'semantic-ui-react'
 import axios from 'axios'
 
 
-import {SERVER_ROUTES, CLIENT_ROUTES} from '../commonVarList'
+import {SERVER_ROUTES, CLIENT_ROUTES} from '../common/commonVarList'
+import connect from "react-redux/es/connect/connect";
+import * as userActions from "../actions/userActions";
 
 
-class SearchPageLayout extends Component {
-    state = {
-        email: '',
-        password: '',
-        keep_sign_in: false
-    };
-
+class SignInPageLayout extends Component {
+    // state = {
+    //     email: '',
+    //     password: '',
+    //     keep_sign_in: false
+    // };
+state = {
+    authenticated: false
+}
     login() {
         let loginObj = {
             email : this.refs.email.value,
@@ -21,7 +26,8 @@ class SearchPageLayout extends Component {
             keep_sign_in:this.refs.keep_sign_in.state.checked
         }
 
-        console.log(loginObj)
+        this.props.dispatch(userActions.login(loginObj))
+        // console.log(loginObj)
 
 
         // axios.post(CONSTANTS.BACKEND_API_ROOT + '/timeslots/stylists', data)
@@ -42,8 +48,19 @@ class SearchPageLayout extends Component {
         //     })
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log('Next props', nextProps);
+
+        if(nextProps.state.user.isAuth){
+            console.log("redirect")
+            this.setState({authenticated: true})
+        }
+    }
 
     render() {
+        if(this.state.authenticated) {
+            return (<Redirect to={CLIENT_ROUTES.DASHBOARD} />);
+        }
         return (
             <div>
                 <MainMenu/>
@@ -54,7 +71,7 @@ class SearchPageLayout extends Component {
 
                     <Grid>
                         <Grid.Row>
-                            <Grid.Column width={5}></Grid.Column>
+                            <Grid.Column width={5}/>
                             <Grid.Column width={6}>
                                 <Card fluid>
                                     <Card.Content>
@@ -85,7 +102,7 @@ class SearchPageLayout extends Component {
                                 <p className="text-center">Don't have an account? <a href={CLIENT_ROUTES.SIGN_UP}>Sign Up</a></p>
 
                             </Grid.Column>
-                            <Grid.Column width={5}></Grid.Column>
+                            <Grid.Column width={5}/>
                         </Grid.Row>
                     </Grid>
 
@@ -96,4 +113,13 @@ class SearchPageLayout extends Component {
 
 }
 
-export default SearchPageLayout;
+// export default SignInPageLayout;
+
+
+function mapStateToProps(state) {
+    return {
+        state: state
+    };
+}
+
+export default connect(mapStateToProps)(SignInPageLayout);

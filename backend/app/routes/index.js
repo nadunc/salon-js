@@ -14,7 +14,7 @@ router.use('/stylists', StylistRoutes);
 router.use('/salons', SalonRoutes);
 router.use('/users', UserRoutes);
 router.use('/timeslots', TimeSlotRoutes);
-router.use('/experience', ExperienceRoutes);
+router.use('/experiences', ExperienceRoutes);
 
 
 module.exports = router;

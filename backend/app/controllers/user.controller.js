@@ -6,6 +6,21 @@ const jwt = require('jsonwebtoken');
 const sequelize = require('../database');
 
 
+// exports.login = (req, res) => {
+//     let email = req.body.email;
+//     let password = req.body.password;
+//
+//     UserModel.findOne({where: {email: email, password: password}}).then((user) => {
+//         // res.json(commonMethods.createResponse(true, null, responseMessages.VALID_PASSWORD_RESET_LINK));
+//         done(null, user)
+//     }).catch((err) => {
+//         // res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+//         done(err)
+//     });
+//
+// };
+
+
 exports.forgetPasswordSendLink = (req, res) => {
     let email = req.body.email;
 
@@ -50,7 +65,6 @@ exports.forgetPasswordValidate = (req, res) => {
         }
     });
 };
-
 
 
 exports.forgetPassword = (req, res) => {

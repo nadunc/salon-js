@@ -39,7 +39,9 @@ exports.create = (req, res) => {
         lastname: temp.lastname,
         email: temp.email,
         promotional_emails: temp.promotional_emails,
-        experience_id: temp.experience
+        experience_id: temp.experience,
+        stylist_price : temp.stylist_price,
+        bio: temp.bio
     };
 
     let user = {

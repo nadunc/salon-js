@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import { NavLink } from 'react-router-dom'
 import  {Menu} from "semantic-ui-react";
 
-import {CLIENT_ROUTES} from '../commonVarList'
+import {CLIENT_ROUTES} from '../common/commonVarList'
+import * as commonMethods from '../common/commonMethods'
 
 class DashboardSideMenu extends Component {
     state = { activeItem: '' }
@@ -13,10 +14,11 @@ class DashboardSideMenu extends Component {
 
     getMenu(){
         let { activeItem } = this.state;
-        let userRole = this.props.userRole;
+        let userType = this.props.userType;
 
 
-        if (userRole === 'stylist') {
+console.log('SideMenu:', commonMethods.isUserTypeStylist(userType))
+        if (commonMethods.isUserTypeStylist(userType)) {
             return(
                 <Menu pointing vertical>
                     <Menu.Item name='dashboard' active={activeItem === 'dashboard'} as={NavLink} to={CLIENT_ROUTES.DASHBOARD_HOME} onClick={this.handleItemClick} />
@@ -28,7 +30,7 @@ class DashboardSideMenu extends Component {
                     <Menu.Item name='change password' active={activeItem === 'change password'} as={NavLink} to={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} onClick={this.handleItemClick} />
                 </Menu>
             );
-        } else if (userRole === 'salon') {
+        } else if (commonMethods.isUserTypeSalon(userType)) {
             return(
                 <Menu pointing vertical>
                     <Menu.Item name='dashboard' active={activeItem === 'dashboard'} as={NavLink} to={CLIENT_ROUTES.DASHBOARD_HOME} onClick={this.handleItemClick} />
@@ -38,7 +40,7 @@ class DashboardSideMenu extends Component {
                     <Menu.Item name='change password' active={activeItem === 'change password'} as={NavLink} to={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} onClick={this.handleItemClick} />
                 </Menu>
             );
-        }else if (userRole === 'admin') {
+        }else if (commonMethods.isUserTypeAdmin(userType)) {
             return(
                 <Menu pointing vertical>
                     <Menu.Item name='dashboard' active={activeItem === 'dashboard'} as={NavLink} to={CLIENT_ROUTES.DASHBOARD_HOME} onClick={this.handleItemClick} />

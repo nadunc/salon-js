@@ -4,7 +4,7 @@ import StylistContainer from '../containers/StylistContainer';
 import {Container} from 'semantic-ui-react'
 import axios from 'axios'
 
-import {SERVER_ROUTES} from '../commonVarList'
+import {SERVER_ROUTES} from '../common/commonVarList'
 import SearchBox from "../components/SearchBox";
 
 class SearchPageLayout extends Component {

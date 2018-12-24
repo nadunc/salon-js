@@ -6,6 +6,7 @@ const CLIENT_ROUTES = {
     // ROOT: 'localhost:5000',
     HOME: '/',
     SIGN_IN: '/signin',
+    SIGN_OUT: '/signout',
     SIGN_UP: '/signup',
     SEARCH: '/search',
     FAQ: '/faq',
@@ -30,7 +31,10 @@ const SERVER_ROOT = 'http://localhost:5000';
 const SERVER_ROUTES = {
     ROOT: SERVER_ROOT,
     GET_AVAILABLE_STYLISTS: SERVER_ROOT+'/timeslots/stylists',
-    GET_EXPERIENCES: SERVER_ROOT+'/experience'
+    GET_EXPERIENCES: SERVER_ROOT+'/experiences',
+    LOGIN: SERVER_ROOT+'/users/login',
+    SIGN_UP_STYLIST: SERVER_ROOT+'/stylists',
+    SIGN_UP_SALON: SERVER_ROOT+'/salons',
 };
 
 export {

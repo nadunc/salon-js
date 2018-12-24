@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Redirect, Route, Switch} from "react-router-dom";
 import {Container, Grid, Image} from 'semantic-ui-react'
-import {CLIENT_ROUTES} from "../commonVarList";
+import {CLIENT_ROUTES} from "../common/commonVarList";
 
 import DashboardSideMenu from '../components/DashboardSideMenu';
 import Error404 from '../components/Error404';
@@ -29,53 +29,58 @@ import AdminContentUsers from '../components/adminControlPanel/AdminContentUsers
 import AdminContentBookings from '../components/adminControlPanel/AdminContentBookings';
 import AdminContentSettings from '../components/adminControlPanel/AdminContentSettings';
 import AdminContentChangePassword from '../components/adminControlPanel/AdminContentChangePassword';
-
+import connect from "react-redux/es/connect/connect";
+import * as commonMethods from '../common/commonMethods'
 
 
 class DashboardPageLayout extends Component {
 
-    state = {
-        // userRole: 'stylist',
-        // userRole: 'salon',
-        userRole: 'admin'
-    }
+    // state = {
+    //     // userType: 'stylist',
+    //     // userType: 'salon',
+    //     userType: 'admin'
+    // }
 
     getRoutes() {
-        if (this.state.userRole === 'stylist') {
+        console.log('THIS.PROPS.STATE: ', this.props.state)
+
+        let userType = this.props.state.user.userType;
+
+        if (commonMethods.isUserTypeStylist(userType)) {
             return (
                 <Switch>
                     <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} component={StylistContentDashboard}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} component={StylistContentCalendar}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_PORTFOLIO} component={StylistContentPortfolio}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} component={StylistContentBookings}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} component={StylistContentSettings}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} component={StylistContentPreferences}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} component={StylistContentChangePassword}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} render={() => (<StylistContentDashboard auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} render={() => (<StylistContentCalendar auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_PORTFOLIO} render={() => (<StylistContentPortfolio auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} render={() => (<StylistContentBookings auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} render={() => (<StylistContentSettings auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} render={() => (<StylistContentPreferences auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} render={() => (<StylistContentChangePassword auth={this.props.state.user}/>)}/>
                     <Route path="*" component={Error404}/>
                 </Switch>
             );
-        } else if (this.state.userRole === 'salon') {
+        } else if (commonMethods.isUserTypeSalon(userType)) {
             return (
                 <Switch>
                     <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} component={SalonContentDashboard}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_PROFILE} component={SalonContentSalonProfile}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} component={SalonContentBookings}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} component={SalonContentSettings}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} component={SalonContentChangePassword}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} render={() => (<SalonContentDashboard auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_PROFILE} render={() => (<SalonContentSalonProfile auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} render={() => (<SalonContentBookings auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} render={() => (<SalonContentSettings auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} render={() => (<SalonContentChangePassword auth={this.props.state.user}/>)}/>
                     <Route path="*" component={Error404}/>
                 </Switch>
             );
-        } else if (this.state.userRole === 'admin') {
+        } else if (commonMethods.isUserTypeAdmin(userType)) {
             return (
                 <Switch>
                     <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} component={AdminContentDashboard}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_USERS} component={AdminContentUsers}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} component={AdminContentBookings}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} component={AdminContentSettings}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} component={AdminContentChangePassword}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} render={() => (<AdminContentDashboard auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_USERS} render={() => (<AdminContentUsers auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} render={() => (<AdminContentBookings auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} render={() => (<AdminContentSettings auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} render={() => (<AdminContentChangePassword auth={this.props.state.user}/>)}/>
                     <Route path="*" component={Error404}/>
                 </Switch>
             );
@@ -93,6 +98,19 @@ class DashboardPageLayout extends Component {
 
 
         let routes = this.getRoutes();
+        let userType = this.props.state.user.userType;
+        let user = this.props.state.user.user;
+        let name, image;
+
+        if(commonMethods.isUserTypeStylist(userType)){
+            name = user.stylist.firstname + ' ' + user.stylist.lastname
+            image = (user.stylist.image === '' || user.stylist.image === null) ? '/images/user_placeholder.jpg' : user.stylist.image;
+        }else if (commonMethods.isUserTypeSalon(userType)){
+            name = user.salon.name
+            image = (user.salon.image === '' || user.salon.image === null) ? '/images/salon_placeholder.png' : user.salon.image;
+        } else if(commonMethods.isUserTypeAdmin(userType)){
+
+        }
 
 
         return (
@@ -104,10 +122,9 @@ class DashboardPageLayout extends Component {
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={3}>
-                                <Image size='small' circular centered className='text-center dashboard-sidebar-image'
-                                       src='/images/user_placeholder.jpg'/>
-                                <p className='text-center dashboard-sidebar-name'>Nadun Chamikara</p>
-                                <DashboardSideMenu userRole={this.state.userRole}/>
+                                <Image size='small' circular centered className='text-center dashboard-sidebar-image' src={image}/>
+                                <p className='text-center dashboard-sidebar-name'>{name}</p>
+                                <DashboardSideMenu userType={this.props.state.user.userType}/>
                             </Grid.Column>
                             <Grid.Column width={2}>
                             </Grid.Column>
@@ -127,4 +144,13 @@ class DashboardPageLayout extends Component {
 
 }
 
-export default DashboardPageLayout;
+// export default DashboardPageLayout;
+
+
+function mapStateToProps(state) {
+    return {
+        state: state
+    };
+}
+
+export default connect(mapStateToProps)(DashboardPageLayout);

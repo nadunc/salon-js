@@ -6,8 +6,8 @@ const SalonModel = sequelize.define('salon', {
     name: {
         type: Sequelize.STRING,
         validate:{
-            isAlphanumeric:{
-                msg : 'Name can only contain letters & numbers'
+            notEmpty:{
+                msg : 'Salon name cannot be empty'
             }
         }
     },

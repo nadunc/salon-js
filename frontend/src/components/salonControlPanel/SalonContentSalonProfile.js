@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Grid, Form, Divider, Button} from "semantic-ui-react";
 import { Link } from 'react-router-dom'
-import { CLIENT_ROUTES } from '../../commonVarList'
+import { CLIENT_ROUTES } from '../../common/commonVarList'
 
 class SalonContentSalonProfile extends Component {
 

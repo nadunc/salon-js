@@ -3,7 +3,7 @@ import MainMenu from '../components/MainMenu';
 import {Container, Segment} from 'semantic-ui-react'
 
 
-class SearchPageLayout extends Component {
+class TermsPageLayout extends Component {
 
 
     render() {
@@ -71,4 +71,4 @@ class SearchPageLayout extends Component {
 
 }
 
-export default SearchPageLayout;
+export default TermsPageLayout;

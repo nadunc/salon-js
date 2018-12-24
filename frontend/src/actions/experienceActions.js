@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {SERVER_ROUTES} from '../commonVarList';
+import {SERVER_ROUTES} from '../common/commonVarList';
 import { ExperienceTypes} from '../types/index';
 // import {messages} from './messages';
 

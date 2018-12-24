@@ -5,7 +5,7 @@ import {Form, Icon} from "semantic-ui-react";
 import SemanticDatepicker from "react-semantic-ui-datepickers";
 import moment from 'moment'
 import axios from "axios";
-import {SERVER_ROUTES, CLIENT_ROUTES} from "../commonVarList";
+import {SERVER_ROUTES, CLIENT_ROUTES} from "../common/commonVarList";
 
 import * as ExperienceActions from '../actions/experienceActions'
 

@@ -24,6 +24,9 @@ module.exports = {
 
     USER_PASSWORD_RESET_SUCCESS : 'Password reset success.',
 
+    USER_LOGIN_SUCCESS : 'Login success.',
+    USER_LOGIN_FAILED : 'Login failed.',
+
 
 
     // // Failed

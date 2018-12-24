@@ -8,10 +8,11 @@ var cors = require('cors')
 
 
 var routes = require('./app/routes/index');
-
 var app = express();
 
 // app.use(morgan('combined'));
+
+
 app.use(cors())
 app.use(bodyParser.json());
 app.use(routes);

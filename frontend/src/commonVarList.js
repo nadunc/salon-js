@@ -25,10 +25,12 @@ const CLIENT_ROUTES = {
 
 };
 
+const SERVER_ROOT = 'http://localhost:5000';
+
 const SERVER_ROUTES = {
-    ROOT: 'http://localhost:5000',
-    GET_AVAILABLE_STYLISTS:'/timeslots/stylists',
-    GET_EXPERIENCES:'/experience'
+    ROOT: SERVER_ROOT,
+    GET_AVAILABLE_STYLISTS: SERVER_ROOT+'/timeslots/stylists',
+    GET_EXPERIENCES: SERVER_ROOT+'/experience'
 };
 
 export {

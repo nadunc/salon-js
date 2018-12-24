@@ -1,9 +1,13 @@
 import React, {Component} from 'react'
+import {connect} from "react-redux";
+
 import {Form, Icon} from "semantic-ui-react";
 import SemanticDatepicker from "react-semantic-ui-datepickers";
 import moment from 'moment'
 import axios from "axios";
 import {SERVER_ROUTES, CLIENT_ROUTES} from "../commonVarList";
+
+import * as ExperienceActions from '../actions/experienceActions'
 
 
 const dropdownValuesFromTimes = [
@@ -102,32 +106,60 @@ class SearchBox extends Component {
     }
 
     componentDidMount() {
-        axios.get(SERVER_ROUTES.ROOT + SERVER_ROUTES.GET_EXPERIENCES)
-            .then(res => {
-                let obj = res.data;
+        // axios.get(SERVER_ROUTES.ROOT + SERVER_ROUTES.GET_EXPERIENCES)
+        //     .then(res => {
+        //         let obj = res.data;
+        //
+        //         if (obj.success) {
+        //             let experiences = obj.data;
+        //             if (experiences && experiences.length > 0) {
+        //
+        //
+        //                 new Promise((resolve, reject)=>{
+        //                     resolve(experiences.map((experience, key)=>{
+        //                         return {key: 'experience_dw_'+experience.id, text: experience.description, value: experience.id};
+        //                     }));
+        //                 }).then((experienceList)=>{
+        //                     experienceList.unshift({key: 'experience_dw_0', text: 'Any', value: '0'});
+        //                     this.setState({dropdownValuesExperiences: experienceList});
+        //                 })
+        //
+        //             }else{
+        //                 this.setState({dropdownValuesExperiences: []});
+        //             }
+        //         }else{
+        //             this.setState({dropdownValuesExperiences: []});
+        //         }
+        //     })
 
-                if (obj.success) {
-                    let experiences = obj.data;
-                    if (experiences && experiences.length > 0) {
-
-
-                        new Promise((resolve, reject)=>{
-                            resolve(experiences.map((experience, key)=>{
-                                return {key: 'experience_dw_'+experience.id, text: experience.description, value: experience.id};
-                            }));
-                        }).then((experienceList)=>{
-                            experienceList.unshift({key: 'experience_dw_0', text: 'Any', value: '0'});
-                            this.setState({dropdownValuesExperiences: experienceList});
-                        })
-
-                    }else{
-                        this.setState({dropdownValuesExperiences: []});
-                    }
-                }else{
-                    this.setState({dropdownValuesExperiences: []});
-                }
-            })
+        this.props.dispatch(ExperienceActions.getExperiences());
     }
+
+    componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        // if (this.props.userID !== prevProps.userID) {
+        //     this.fetchData(this.props.userID);
+        // }
+
+        if (this.props.state.experiences !== prevProps.state.experiences) {
+            console.log("SearchBox props:", this.props)
+
+            let experiences = this.props.state.experiences.experiences
+
+            new Promise((resolve, reject) => {
+                resolve(experiences.map((experience, key) => {
+                    return {key: 'experience_dw_' + experience.id, text: experience.description, value: experience.id};
+                }));
+            }).then((experienceList) => {
+                experienceList.unshift({key: 'experience_dw_0', text: 'Any', value: '0'});
+                this.setState({dropdownValuesExperiences: experienceList});
+            })
+
+            console.log("SearchBox state:", this.state)
+
+        }
+    }
+
 
     render() {
         return (
@@ -147,10 +179,12 @@ class SearchBox extends Component {
                     <Form.Select fluid label='Rating' options={dropdownValuesRatings} placeholder='Rating'
                                  defaultValue="0" name='rating' onChange={this.handleChange.bind(this)}/>
 
-                    <Form.Select fluid label='Experience' options={this.state.dropdownValuesExperiences} placeholder='Experience'
+                    <Form.Select fluid label='Experience' options={this.state.dropdownValuesExperiences}
+                                 placeholder='Experience'
                                  defaultValue="0" name='experience' onChange={this.handleChange.bind(this)}/>
 
-                    <Form.Button color="green" fluid size='large' className="search-btn" onClick={this.search.bind(this)}>
+                    <Form.Button color="green" fluid size='large' className="search-btn"
+                                 onClick={this.search.bind(this)}>
                         <Icon name='search'/>
                         Search
                     </Form.Button>
@@ -161,4 +195,13 @@ class SearchBox extends Component {
     };
 }
 
-export default SearchBox;
+// export default SearchBox;
+
+
+function mapStateToProps(state) {
+    return {
+        state: state
+    };
+}
+
+export default connect(mapStateToProps)(SearchBox);

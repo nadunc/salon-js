@@ -33,26 +33,25 @@ class MainMenu extends Component {
 
 
     render() {
-        let user = this.props.state.user;
-        // user.isAuth = false
-        // user.user_role = Stylist | Salon | Admin
+        let auth = this.props.auth;
+        let user = this.props.auth.user;
 
         let profileElem;
 
-        if (user.isAuth) {
-
-            console.log('auth user: ', user.user)
-
+        if (auth.isAuth) {
+            //
+            // console.log('auth user: ', user.user)
+            //
             let image, name;
 
             if (user.userType.toUpperCase() === 'Stylist'.toUpperCase()) {
-                image = user.user.stylist.image;
+                image = user.stylist.image;
                 image = (image === '' || image === null) ? '/images/user_placeholder.jpg' : image;
-                name = user.user.stylist.firstname;
+                name = user.stylist.firstname;
             } else if (user.userType.toUpperCase() === 'Salon'.toUpperCase()) {
-                image = user.user.salon.image;
+                image = user.salon.image;
                 image = (image === '' || image === null)? '/images/salon_placeholder.png' : image;
-                name = user.user.salon.name;
+                name = user.salon.name;
             }
 
 
@@ -91,15 +90,15 @@ class MainMenu extends Component {
                                 style={{marginRight: '2em'}}/>
                         {/*<Icon inverted link={CLIENT_ROUTES.SEARCH} name='search' style={{marginLeft: '0.5em', marginRight: '2em'}}/>*/}
 
-                        {!user.isAuth &&
+                        {!auth.isAuth &&
                             <Button size='mini' as={Link} to={CLIENT_ROUTES.SIGN_IN} style={{marginLeft: '0.5em'}}> Sign In</Button>
                         }
 
-                        {user.isAuth ? '' :
+                        {auth.isAuth ? '' :
                             <Button size='mini' as={Link} to={CLIENT_ROUTES.SIGN_UP} style={{marginLeft: '0.5em'}}>Sign Up</Button>
                         }
 
-                        {user.isAuth && profileElem}
+                        {auth.isAuth && profileElem}
 
 
                     </Menu.Item>
@@ -115,7 +114,7 @@ class MainMenu extends Component {
 
 function mapStateToProps(state) {
     return {
-        state: state
+        auth: state.auth
     };
 }
 

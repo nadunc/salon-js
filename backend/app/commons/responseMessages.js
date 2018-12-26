@@ -15,6 +15,8 @@ module.exports = {
     TIMESLOT_ADD_SUCCESS : 'Successfully added available time slot.',
     TIMESLOT_IS_NOT_AVAILABLE : 'Failed to add time slot. Time slot is already filled.',
 
+    STYLIST_UPDATE_SUCCESS : 'Successfully updated.',
+
 
     USER_PASSWORD_RESET_CODE_SENT : 'Password reset link sent. Please check you mailbox.',
     USER_NOT_FOUND : 'User not found.',

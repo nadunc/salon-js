@@ -8,6 +8,7 @@ router.get('/:id', StylistController.findById);
 
 
 router.post('/', StylistController.create);
+router.patch('/:id', StylistController.update); // only updating stylist can call
 
 
 module.exports = router;

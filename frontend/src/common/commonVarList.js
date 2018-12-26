@@ -35,10 +35,15 @@ const SERVER_ROUTES = {
     LOGIN: SERVER_ROOT+'/users/login',
     SIGN_UP_STYLIST: SERVER_ROOT+'/stylists',
     SIGN_UP_SALON: SERVER_ROOT+'/salons',
+    GET_STYLISTS: SERVER_ROOT+'/stylists',
+    UPDATE_STYLIST: SERVER_ROOT+'/stylists',
 };
+
+const COMMON_ERROR_MESSAGE = 'Something went wrong. Please refresh the page';
 
 export {
     // CONSTANTS,
     CLIENT_ROUTES,
-    SERVER_ROUTES
+    SERVER_ROUTES,
+    COMMON_ERROR_MESSAGE
 }

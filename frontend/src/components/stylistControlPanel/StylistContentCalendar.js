@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {Grid, Statistic, Icon, Segment, Divider} from "semantic-ui-react";
+import Calendar from "../Calendar";
+
 
 class StylistContentCalendar extends Component {
 
@@ -12,6 +14,8 @@ class StylistContentCalendar extends Component {
 
                 <Divider/>
                 <div className='dashboard-content-top-margin'/>
+
+                <Calendar/>
             </div>
         );
     };

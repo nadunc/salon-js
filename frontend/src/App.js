@@ -36,6 +36,8 @@ import {CLIENT_ROUTES} from './common/commonVarList'
 
 import './App.scss';
 import connect from "react-redux/es/connect/connect";
+import * as authActions from "./actions/authActions";
+import {AuthenticationTypes} from "./types";
 
 
 //
@@ -66,50 +68,73 @@ import connect from "react-redux/es/connect/connect";
 
 class App extends Component {
 
-    // componentWillMount() {
-    //     if(localStorage.getItem('user')){
-    //         // this.props.state.user = sessionStorage.getItem('user');
-    //         console.log(localStorage.getItem('user'));
-    //         this.setState({user: localStorage.getItem('user')})
+    // componentDidMount() {
+    //     if (localStorage.getItem('state')) {
+    //         this.setState(JSON.parse(localStorage.getItem('state')));
     //     }
-    // }
-    //
-    // componentDidUpdate(prevProps) {
-    //     // Typical usage (don't forget to compare props):
-    //     // if (this.props.userID !== prevProps.userID) {
-    //     //     this.fetchData(this.props.userID);
-    //     // }
-    //
-    //     if (this.props.state.user !== prevProps.state.user) {
-    //             localStorage.setItem('user', this.props.state.user);
-    //             console.log("App", this.props.state.user)
-    //     }
-    //
+    //     console.log("componentDidMount")
     // }
 
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     if (nextProps.state.user !== prevState.state.user) {
-    //         //         // return { user: nextProps.state.user};
-    //         //sessionStorage.setItem('auth', data);
-    //         console.log("App", this.state.user)
-    //     }
+    // state = {
+    //     isAuth: false,
+    //     user : null,
+    // };
+    //
+    // setAuthState(authenticated, user){
+    //     this.setState({isAuth: authenticated, user:user})
     // }
 
-    state = {}
+    // childProps = {
+    //     isAuth: this.state.isAuth,
+    //     user: this.state.user,
+    //     setAuthState : this.setAuthState
+    // }
 
-    componentDidMount() {
-        if (localStorage.getItem('state')) {
-            this.setState(JSON.parse(localStorage.getItem('state')));
+    constructor(props){
+        super(props)
+        this.state = {
+            fetchingLocalStorage : false,
         }
-        console.log("componentDidMount")
     }
 
+    componentWillMount(){
+        console.log('componentWillMount: App')
+        console.log('App props state auth:', this.props.state.auth)
+
+        if(!this.props.state.auth.isAuth){
+            this.setState({fetchingLocalStorage:true})
+            this.props.dispatch(authActions.getAuthFromLocalStorage())
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps: App')
+        console.log('App nextProps.state:', nextProps.state)
+
+        if (nextProps.state.auth.action === AuthenticationTypes.GET_AUTH_FROM_LOCAL_STORAGE_SUCCESS) {
+            console.log('Local storage fetch success')
+            this.setState({fetchingLocalStorage:false})
+            console.log('App nextProps.state.auth:', nextProps.state.auth)
+        }
+
+        if (nextProps.state.auth.action === AuthenticationTypes.GET_AUTH_FROM_LOCAL_STORAGE_FAILED) {
+            this.setState({fetchingLocalStorage:false})
+        }
+    }
+
+    handleLogout(){
+        this.props.dispatch(authActions.clearAuthFromLocalStorage())
+    }
 
 
     render() {
 
-        let user = this.props.state.user;
+        let auth = this.props.state.auth;
 
+
+        // if (!auth.isAuth) {
+        //     return (<Redirect to={CLIENT_ROUTES.SIGN_IN}/>);
+        // }
         // console.log(JSON.parse(localStorage.getItem('user')))
 
 
@@ -137,24 +162,34 @@ class App extends Component {
         //     </Router>
         // );
 
+        let isLoading = this.state.fetchingLocalStorage;
+        let isAuth = this.props.state.auth.isAuth;
+        console.log('isLoading: ', isLoading)
+
         return (
 
+
             <Router>
+                {(isLoading) ? '' : (
+
                 <Switch>
                     <Route exact path={CLIENT_ROUTES.HOME} component={HomePageLayout}/>
                     <Route path={CLIENT_ROUTES.SEARCH} component={SearchPageLayout}/>
                     <Route path={CLIENT_ROUTES.SIGN_IN} component={SignInPageLayout}/>
-                    <Route path={CLIENT_ROUTES.SIGN_UP} component={SignUpPageLayout}/>
+                    <Route path={CLIENT_ROUTES.SIGN_OUT} render={() => { this.handleLogout(); return(<Redirect to={CLIENT_ROUTES.HOME}/>)}}/>
+                    {!isAuth && <Route path={CLIENT_ROUTES.SIGN_UP} component={SignUpPageLayout}/>}
                     <Route path={CLIENT_ROUTES.FAQ} component={FAQPageLayout}/>
                     <Route path={CLIENT_ROUTES.TERMS} component={TermsPageLayout}/>
                     <Route path={CLIENT_ROUTES.STYLIST} component={StylistPortfolioLayout}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD} component={DashboardPageLayout}/>
-                    <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
+                    {isAuth && <Route path={CLIENT_ROUTES.DASHBOARD} component={DashboardPageLayout}/>}
+                    {isAuth && <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>}
 
                     <Route path='*' component={Error404}/>
-
                 </Switch>
+                )}
+
             </Router>
+
         );
     }
 }

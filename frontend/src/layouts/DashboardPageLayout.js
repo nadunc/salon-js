@@ -31,32 +31,26 @@ import AdminContentSettings from '../components/adminControlPanel/AdminContentSe
 import AdminContentChangePassword from '../components/adminControlPanel/AdminContentChangePassword';
 import connect from "react-redux/es/connect/connect";
 import * as commonMethods from '../common/commonMethods'
+import {AuthenticationTypes} from "../types";
 
 
 class DashboardPageLayout extends Component {
 
-    // state = {
-    //     // userType: 'stylist',
-    //     // userType: 'salon',
-    //     userType: 'admin'
-    // }
-
     getRoutes() {
-        console.log('THIS.PROPS.STATE: ', this.props.state)
 
-        let userType = this.props.state.user.userType;
+        let userType = this.props.auth.user.userType;
 
         if (commonMethods.isUserTypeStylist(userType)) {
             return (
                 <Switch>
                     <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} render={() => (<StylistContentDashboard auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} render={() => (<StylistContentCalendar auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_PORTFOLIO} render={() => (<StylistContentPortfolio auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} render={() => (<StylistContentBookings auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} render={() => (<StylistContentSettings auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} render={() => (<StylistContentPreferences auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} render={() => (<StylistContentChangePassword auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} render={() => (<StylistContentDashboard auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} render={() => (<StylistContentCalendar auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_PORTFOLIO} render={() => (<StylistContentPortfolio auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} render={() => (<StylistContentBookings auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} render={() => (<StylistContentSettings auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} render={() => (<StylistContentPreferences auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} render={() => (<StylistContentChangePassword auth={this.props.auth}/>)}/>
                     <Route path="*" component={Error404}/>
                 </Switch>
             );
@@ -64,11 +58,11 @@ class DashboardPageLayout extends Component {
             return (
                 <Switch>
                     <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} render={() => (<SalonContentDashboard auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_PROFILE} render={() => (<SalonContentSalonProfile auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} render={() => (<SalonContentBookings auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} render={() => (<SalonContentSettings auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} render={() => (<SalonContentChangePassword auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} render={() => (<SalonContentDashboard auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_PROFILE} render={() => (<SalonContentSalonProfile auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} render={() => (<SalonContentBookings auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} render={() => (<SalonContentSettings auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} render={() => (<SalonContentChangePassword auth={this.props.auth}/>)}/>
                     <Route path="*" component={Error404}/>
                 </Switch>
             );
@@ -76,11 +70,11 @@ class DashboardPageLayout extends Component {
             return (
                 <Switch>
                     <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} render={() => (<AdminContentDashboard auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_USERS} render={() => (<AdminContentUsers auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} render={() => (<AdminContentBookings auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} render={() => (<AdminContentSettings auth={this.props.state.user}/>)}/>
-                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} render={() => (<AdminContentChangePassword auth={this.props.state.user}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_HOME} render={() => (<AdminContentDashboard auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_USERS} render={() => (<AdminContentUsers auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} render={() => (<AdminContentBookings auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} render={() => (<AdminContentSettings auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_CHANGE_PASSWORD} render={() => (<AdminContentChangePassword auth={this.props.auth}/>)}/>
                     <Route path="*" component={Error404}/>
                 </Switch>
             );
@@ -98,8 +92,8 @@ class DashboardPageLayout extends Component {
 
 
         let routes = this.getRoutes();
-        let userType = this.props.state.user.userType;
-        let user = this.props.state.user.user;
+        let userType = this.props.auth.user.userType;
+        let user = this.props.auth.user;
         let name, image;
 
         if(commonMethods.isUserTypeStylist(userType)){
@@ -124,7 +118,7 @@ class DashboardPageLayout extends Component {
                             <Grid.Column width={3}>
                                 <Image size='small' circular centered className='text-center dashboard-sidebar-image' src={image}/>
                                 <p className='text-center dashboard-sidebar-name'>{name}</p>
-                                <DashboardSideMenu userType={this.props.state.user.userType}/>
+                                <DashboardSideMenu userType={userType}/>
                             </Grid.Column>
                             <Grid.Column width={2}>
                             </Grid.Column>
@@ -149,7 +143,7 @@ class DashboardPageLayout extends Component {
 
 function mapStateToProps(state) {
     return {
-        state: state
+        auth: state.auth
     };
 }
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Redirect } from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import MainMenu from '../components/MainMenu';
 import {Container, Form, Checkbox, Button, Card, Grid} from 'semantic-ui-react'
 import axios from 'axios'
@@ -7,59 +7,45 @@ import axios from 'axios'
 
 import {SERVER_ROUTES, CLIENT_ROUTES} from '../common/commonVarList'
 import connect from "react-redux/es/connect/connect";
-import * as userActions from "../actions/userActions";
+import * as userActions from "../actions/authActions";
+import {AuthenticationTypes} from "../types/index";
 
 
 class SignInPageLayout extends Component {
-    // state = {
-    //     email: '',
-    //     password: '',
-    //     keep_sign_in: false
-    // };
-state = {
-    authenticated: false
-}
+
+    constructor(props) {
+        super(props)
+
+        // this.state = {
+        //     isAuthenticated: false
+        // }
+    }
+
     login() {
         let loginObj = {
-            email : this.refs.email.value,
+            email: this.refs.email.value,
             password: this.refs.password.value,
-            keep_sign_in:this.refs.keep_sign_in.state.checked
+            keep_sign_in: this.refs.keep_sign_in.state.checked
         }
 
         this.props.dispatch(userActions.login(loginObj))
-        // console.log(loginObj)
-
-
-        // axios.post(CONSTANTS.BACKEND_API_ROOT + '/timeslots/stylists', data)
-        //     .then(res => {
-        //         let obj = res.data;
-        //
-        //         if (obj.success) {
-        //             let timeslots = obj.data;
-        //             if (timeslots && timeslots.length > 0) {
-        //                 this.setState({timeslots: timeslots});
-        //             } else {
-        //                 this.setState({timeslots: []});
-        //             }
-        //         } else {
-        //             this.setState({timeslots: []});
-        //         }
-        //
-        //     })
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        console.log('Next props', nextProps);
 
-        if(nextProps.state.user.isAuth){
-            console.log("redirect")
-            this.setState({authenticated: true})
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.action === AuthenticationTypes.SIGIN_IN_SUCCESS) {
+            localStorage.setItem('auth', JSON.stringify(nextProps.auth));
+        }
+
+        if (nextProps.action === AuthenticationTypes.SIGIN_IN_FAILED) {
+            alert(nextProps.message)
         }
     }
 
+
     render() {
-        if(this.state.authenticated) {
-            return (<Redirect to={CLIENT_ROUTES.DASHBOARD} />);
+        if (this.props.auth.isAuth) {
+            return (<Redirect to={CLIENT_ROUTES.DASHBOARD}/>);
         }
         return (
             <div>
@@ -75,11 +61,8 @@ state = {
                             <Grid.Column width={6}>
                                 <Card fluid>
                                     <Card.Content>
-                                        {/*<Card.Header>Matthew Harris</Card.Header>*/}
-                                        {/*<Card.Meta>Co-Worker</Card.Meta>*/}
+
                                         <Card.Description>
-
-
                                             <Form>
                                                 <Form.Field>
                                                     <label>Email</label>
@@ -93,14 +76,14 @@ state = {
                                                     <Checkbox ref="keep_sign_in" label='Keep me signed in'/>
 
                                                 </Form.Field>
-                                                <Button fluid color="green" type='submit' onClick={this.login.bind(this)}>Sign In</Button>
+                                                <Button fluid color="green" type='submit'
+                                                        onClick={this.login.bind(this)}>Sign In</Button>
                                             </Form>
 
                                         </Card.Description>
                                     </Card.Content>
                                 </Card>
                                 <p className="text-center">Don't have an account? <a href={CLIENT_ROUTES.SIGN_UP}>Sign Up</a></p>
-
                             </Grid.Column>
                             <Grid.Column width={5}/>
                         </Grid.Row>
@@ -117,8 +100,14 @@ state = {
 
 
 function mapStateToProps(state) {
+    // return {
+    //     state: state
+    // };
     return {
-        state: state
+        auth: state.auth,
+        user: state.auth.user,
+        message: state.auth.message,
+        action: state.auth.action
     };
 }
 

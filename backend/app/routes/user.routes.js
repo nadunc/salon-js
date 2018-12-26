@@ -45,7 +45,7 @@ router.post('/login', async (req, res, next) => {
                     token: token,
                     id: user.id,
                     email: user.email,
-                    user_role: user.user_role,
+                    userType: user.user_role.name,
                     stylist: {},
                     salon: {},
                     admin: {}

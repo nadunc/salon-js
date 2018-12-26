@@ -1,5 +1,6 @@
 var StylistModel = require('../models/stylist.model');
 var UserModel = require('../models/user.model');
+var ExperienceModel = require('../models/experience.model');
 var commonMethods = require('../commons/commonMethods');
 var responseMessages = require('../commons/responseMessages');
 var validations = require('../commons/validaion');
@@ -20,7 +21,7 @@ exports.findAll = (req, res) => {
 
 exports.findById = (req, res) => {
 
-    StylistModel.findByPk(req.params.id).then(stylist => {
+    StylistModel.findOne({where: {id:req.params.id}, include:[ExperienceModel]}).then(stylist => {
         res.json(commonMethods.createResponse(true, stylist, responseMessages.STYLIST_RETRIEVE_SUCCESS));
 
     }).catch(err => {
@@ -72,5 +73,35 @@ exports.create = (req, res) => {
 
 
 };
+
+
+
+exports.update = (req, res) => {
+    let id = req.params.id;
+    let temp = req.body;
+
+
+    let stylistUpdate = {
+        firstname: temp.firstname,
+        lastname: temp.lastname,
+        image: temp.image,
+        experience_id: temp.experience_id,
+        stylist_price : temp.stylist_price,
+        educator_price : temp.educator_price,
+        bio: temp.bio
+    };
+
+    StylistModel.findOne({where: {id:req.params.id}, include:[ExperienceModel]}).then((stylist) => {
+        stylist.update(stylistUpdate).then((stylist)=>{
+            res.json(commonMethods.createResponse(true, stylist, responseMessages.STYLIST_UPDATE_SUCCESS));
+        }).catch((err)=>{
+            res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+        })
+    }).catch(err => {
+        res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+    });
+
+
+}
 
 

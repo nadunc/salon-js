@@ -42,8 +42,9 @@ exports.findStylistsAvailableSlotsByDate = (req, res) => {
 
     let date = req.body.date;
 
-    // TODO : get logged stylists id
-    let stylistId = 1;
+    // TODO : get logged stylists id, token
+    let stylistId = req.body.stylist_id;
+
     /***************************************************************************************************************************************************/
 
     TimeSlotModel.findAll({where: {stylist_id: stylistId, date: date}}).then(timeslots => {
@@ -54,6 +55,21 @@ exports.findStylistsAvailableSlotsByDate = (req, res) => {
     });
 };
 
+exports.findStylistsAvailableSlots = (req, res) => {
+
+    let date = req.body.date;
+
+    // TODO : get logged stylists id, token
+    let stylistId = req.body.stylist_id;
+
+    /***************************************************************************************************************************************************/
+
+    TimeSlotModel.findAll({where: {stylist_id: stylistId}}).then(timeslots => {
+        res.json(commonMethods.createResponse(true, timeslots, responseMessages.STYLISTS_AVAILABLE_SLOTS_FETCH_SUCCESS));
+    }).catch(err => {
+        res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+    });
+};
 
 exports.create = (req, res) => {
 
@@ -61,8 +77,8 @@ exports.create = (req, res) => {
     let start = req.body.start;
     let end = req.body.end;
 
-    // TODO
-    let stylistId = 1;
+    // TODO : token
+    let stylistId = req.body.stylist_id;
 
     let sql = "SELECT COUNT(*) as count FROM timeslots " +
         "WHERE stylist_id=:stylist_id AND date=:date " +

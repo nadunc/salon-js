@@ -138,9 +138,14 @@ class Calendar extends Component {
         })
     }
 
+    onDoubleClick(e){
+        console.log(e)
+    }
+
     render() {
         return (
             <BigCalendar
+                className='big-calendar-height'
                 events={this.state.eventList}
                 views={this.state.views}
                 step={60}
@@ -148,9 +153,33 @@ class Calendar extends Component {
                 max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
                 defaultDate={new Date(2015, 3, 1)}
                 localizer={this.state.localizer}
+                onSelectSlot={this.onDoubleClick}
+                selectable={true}
             />
         );
     };
 }
 
 export default Calendar;
+
+
+
+//
+// // Setup the localizer by providing the moment (or globalize) Object
+// // to the correct localizer.
+// const localizer = BigCalendar.momentLocalizer(moment) // or globalizeLocalizer
+// const myEventsList = []
+//
+// const MyCalendar = props => (
+//     <div>
+//         <BigCalendar
+//             className='big-calendar-height'
+//             localizer={localizer}
+//             events={myEventsList}
+//             startAccessor="start"
+//             endAccessor="end"
+//         />
+//     </div>
+// )
+//
+// export default MyCalendar

@@ -8,27 +8,31 @@ import {SERVER_ROUTES} from '../common/commonVarList'
 import SearchBox from "../components/SearchBox";
 
 class SearchPageLayout extends Component {
-    state = {
-        timeslots: []
-        // stylists: [
-        //     {firstname: 'XXXXXX', lastname: 'YYYYYYYYYY', work_as_stylist:true, work_as_educator:true, bio: ''},
-        //
-        //
-        //
-        //     {name: 'Dulakshi Soysa', age: 25},
-        //     {name: 'Prasad Prasad', age: 25},
-        //     {name: 'Ranjitha Ranjitha', age: 25},
-        //     {name: 'Sajith Chamara', age: 25},
-        //     {name: 'Vivesh Kumar', age: 25},
-        //     {name: 'Udara Abeythilaka', age: 25},
-        //     {name: 'BBBB', age: 25},
-        //     {name: 'BBBB', age: 25},
-        //     {name: 'BBBB', age: 25},
-        //     {name: 'BBBB', age: 25},
-        //     {name: 'BBBB', age: 25},
-        //     {name: 'BBBB', age: 25},
-        // ]
-    };
+
+    constructor(props){
+        super(props)
+        this.state = {
+            timeslots: []
+            // stylists: [
+            //     {firstname: 'XXXXXX', lastname: 'YYYYYYYYYY', work_as_stylist:true, work_as_educator:true, bio: ''},
+            //
+            //
+            //
+            //     {name: 'Dulakshi Soysa', age: 25},
+            //     {name: 'Prasad Prasad', age: 25},
+            //     {name: 'Ranjitha Ranjitha', age: 25},
+            //     {name: 'Sajith Chamara', age: 25},
+            //     {name: 'Vivesh Kumar', age: 25},
+            //     {name: 'Udara Abeythilaka', age: 25},
+            //     {name: 'BBBB', age: 25},
+            //     {name: 'BBBB', age: 25},
+            //     {name: 'BBBB', age: 25},
+            //     {name: 'BBBB', age: 25},
+            //     {name: 'BBBB', age: 25},
+            //     {name: 'BBBB', age: 25},
+            // ]
+        };
+    }
 
     componentDidMount() {
         // axios.get(CONSTANTS.BACKEND_API_ROOT+'/stylists')
@@ -43,7 +47,7 @@ class SearchPageLayout extends Component {
     }
 
     search(data) {
-        axios.post(SERVER_ROUTES.ROOT + SERVER_ROUTES.GET_AVAILABLE_STYLISTS, data)
+        axios.post(SERVER_ROUTES.GET_AVAILABLE_STYLISTS, data)
             .then(res => {
                 let obj = res.data;
 
@@ -69,7 +73,7 @@ class SearchPageLayout extends Component {
 
                 <Container>
 
-                    <SearchBox callback={this.search.bind(this)}/>
+                    <SearchBox search={this.search.bind(this)}/>
 
                     <h1 className="page-h1">Search Results</h1>
 

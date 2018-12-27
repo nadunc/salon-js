@@ -6,6 +6,7 @@ var router = express.Router();
 router.post('/stylists', TimeSlotController.findAvailableStylistsByTimeRange);
 // router.post('/my', TimeSlotController.findStylistAvailableSlotsByTimeRange);
 router.post('/my', TimeSlotController.findStylistsAvailableSlotsByDate);
+router.post('/my/all', TimeSlotController.findStylistsAvailableSlots);
 
 // router.get('/:id', SalonController.findById);
 

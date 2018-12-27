@@ -133,8 +133,7 @@ class StylistContentPortfolio extends Component {
                 <h1 className='page-h1'>
                     Portfolio
 
-                    <Button basic size="mini" className='dashboard-portfolio-view-btn'
-                            href={CLIENT_ROUTES.STYLIST.replace(':id', user.stylist.id)} content='View Portfolio'/>
+                    <Button basic size="mini" className='dashboard-portfolio-view-btn' as={Link} to={CLIENT_ROUTES.STYLIST.replace(':id', user.stylist.id)} content='View Portfolio'/>
                 </h1>
 
                 <Divider/>

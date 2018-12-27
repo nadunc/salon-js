@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import {Button, Card, Image, Grid, Statistic, Icon} from "semantic-ui-react";
+import {CLIENT_ROUTES} from "../common/commonVarList";
 
 class StylistCard extends Component {
-    state = {}
 
     constructor(props) {
         super(props);
@@ -75,7 +76,7 @@ class StylistCard extends Component {
 
                                     <Grid.Row>
                                         <Grid.Column width={16}>
-                                            <Button color="green" fluid >Hire</Button>
+                                            <Button color="green" fluid as={Link} to={CLIENT_ROUTES.STYLIST.replace(':id', stylist.id)}>Hire</Button>
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>

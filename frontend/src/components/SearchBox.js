@@ -8,88 +8,26 @@ import axios from "axios";
 import {SERVER_ROUTES, CLIENT_ROUTES} from "../common/commonVarList";
 
 import * as ExperienceActions from '../actions/experienceActions'
-
-
-const dropdownValuesFromTimes = [
-    {key: '00:00:00', text: '12 AM', value: '00:00:00'},
-    {key: '01:00:00', text: '01 AM', value: '01:00:00'},
-    {key: '02:00:00', text: '02 AM', value: '02:00:00'},
-    {key: '03:00:00', text: '03 AM', value: '03:00:00'},
-    {key: '04:00:00', text: '04 AM', value: '04:00:00'},
-    {key: '05:00:00', text: '05 AM', value: '05:00:00'},
-    {key: '06:00:00', text: '06 AM', value: '06:00:00'},
-    {key: '07:00:00', text: '07 AM', value: '07:00:00'},
-    {key: '08:00:00', text: '08 AM', value: '08:00:00'},
-    {key: '09:00:00', text: '09 AM', value: '09:00:00'},
-    {key: '10:00:00', text: '10 AM', value: '10:00:00'},
-    {key: '11:00:00', text: '11 AM', value: '11:00:00'},
-    {key: '12:00:00', text: '12 AM', value: '12:00:00'},
-    {key: '13:00:00', text: '01 PM', value: '13:00:00'},
-    {key: '14:00:00', text: '02 PM', value: '14:00:00'},
-    {key: '15:00:00', text: '03 PM', value: '15:00:00'},
-    {key: '16:00:00', text: '04 PM', value: '16:00:00'},
-    {key: '17:00:00', text: '05 PM', value: '17:00:00'},
-    {key: '18:00:00', text: '06 PM', value: '18:00:00'},
-    {key: '19:00:00', text: '07 PM', value: '19:00:00'},
-    {key: '20:00:00', text: '08 PM', value: '20:00:00'},
-    {key: '21:00:00', text: '09 PM', value: '21:00:00'},
-    {key: '22:00:00', text: '10 PM', value: '22:00:00'},
-    {key: '23:00:00', text: '11 PM', value: '23:00:00'}
-]
-
-const dropdownValuesToTimes = [
-    {key: '01:00:00', text: '01 AM', value: '01:00:00'},
-    {key: '02:00:00', text: '02 AM', value: '02:00:00'},
-    {key: '03:00:00', text: '03 AM', value: '03:00:00'},
-    {key: '04:00:00', text: '04 AM', value: '04:00:00'},
-    {key: '05:00:00', text: '05 AM', value: '05:00:00'},
-    {key: '06:00:00', text: '06 AM', value: '06:00:00'},
-    {key: '07:00:00', text: '07 AM', value: '07:00:00'},
-    {key: '08:00:00', text: '08 AM', value: '08:00:00'},
-    {key: '09:00:00', text: '09 AM', value: '09:00:00'},
-    {key: '10:00:00', text: '10 AM', value: '10:00:00'},
-    {key: '11:00:00', text: '11 AM', value: '11:00:00'},
-    {key: '12:00:00', text: '12 AM', value: '12:00:00'},
-    {key: '13:00:00', text: '01 PM', value: '13:00:00'},
-    {key: '14:00:00', text: '02 PM', value: '14:00:00'},
-    {key: '15:00:00', text: '03 PM', value: '15:00:00'},
-    {key: '16:00:00', text: '04 PM', value: '16:00:00'},
-    {key: '17:00:00', text: '05 PM', value: '17:00:00'},
-    {key: '18:00:00', text: '06 PM', value: '18:00:00'},
-    {key: '19:00:00', text: '07 PM', value: '19:00:00'},
-    {key: '20:00:00', text: '08 PM', value: '20:00:00'},
-    {key: '21:00:00', text: '09 PM', value: '21:00:00'},
-    {key: '22:00:00', text: '10 PM', value: '22:00:00'},
-    {key: '23:00:00', text: '11 PM', value: '23:00:00'},
-    {key: '00:00:00', text: '12 AM', value: '00:00:00'},
-]
-
-const dropdownValuesPrices = [
-    {key: 'price_dw_lth', text: 'Low to High', value: 'lth'},
-    {key: 'price_dw_htl', text: 'High to Low', value: 'htl'}
-]
-
-const dropdownValuesRatings = [
-    {key: 'rating_dw_any', text: 'Any', value: '0'},
-    {key: 'rating_dw_1', text: '1 Star or Higher', value: '1'},
-    {key: 'rating_dw_2', text: '2 Stars or Higher', value: '2'},
-    {key: 'rating_dw_3', text: '3 Star or Higher', value: '3'},
-    {key: 'rating_dw_4', text: '4 Star or Higher', value: '4'},
-    {key: 'rating_dw_5', text: '5 Stars', value: '5'}
-]
+import dropdownValues from '../common/dropdownValues'
 
 
 class SearchBox extends Component {
-    state = {
-        date: '',
-        start: '',
-        end: '',
-        price: 'lth',
-        rating: '0',
-        experience: '0',
-        dropdownValuesExperiences: []
 
+    constructor(props){
+        super(props)
+
+        this.state = {
+            date: '',
+            start: '',
+            end: '',
+            price: 'lth',
+            rating: '0',
+            experience: '0',
+            dropdownValuesExperiences: []
+
+        }
     }
+
 
     handleChange = (e, {name, value}) => {
         this.setState({[name]: value})
@@ -102,7 +40,14 @@ class SearchBox extends Component {
 
     search() {
         console.log(this.state)
-        this.props.callback(this.state)
+        this.props.search({
+            date: this.state.date,
+            start: this.state.start,
+            end: this.state.end,
+            price: this.state.price,
+            rating: this.state.rating,
+            experience: this.state.experience,
+        })
     }
 
     componentDidMount() {
@@ -170,13 +115,13 @@ class SearchBox extends Component {
                                         onDateChange={this.datePicked.bind(this)} name='date'/>
                     {/*<Form.Select fluid label='From' options={fromTimes} placeholder='From' icon='clock outline' iconPosition='left'/>*/}
                     {/*<Form.Select fluid label='To' options={toTimes} placeholder='To' icon='clock' iconPosition='left'/>*/}
-                    <Form.Select fluid label='From' options={dropdownValuesFromTimes} placeholder='From' name='start'
+                    <Form.Select fluid label='From' options={dropdownValues.FromTimes} placeholder='From' name='start'
                                  onChange={this.handleChange.bind(this)}/>
-                    <Form.Select fluid label='To' options={dropdownValuesToTimes} placeholder='To' name='end'
+                    <Form.Select fluid label='To' options={dropdownValues.ToTimes} placeholder='To' name='end'
                                  onChange={this.handleChange.bind(this)}/>
-                    <Form.Select fluid label='Price' options={dropdownValuesPrices} placeholder='Price'
+                    <Form.Select fluid label='Price' options={dropdownValues.Prices} placeholder='Price'
                                  defaultValue="lth" name='price' onChange={this.handleChange.bind(this)}/>
-                    <Form.Select fluid label='Rating' options={dropdownValuesRatings} placeholder='Rating'
+                    <Form.Select fluid label='Rating' options={dropdownValues.Ratings} placeholder='Rating'
                                  defaultValue="0" name='rating' onChange={this.handleChange.bind(this)}/>
 
                     <Form.Select fluid label='Experience' options={this.state.dropdownValuesExperiences}

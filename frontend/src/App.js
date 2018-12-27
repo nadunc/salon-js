@@ -31,6 +31,7 @@ import TermsPageLayout from './layouts/TermsPageLayout';
 import StylistPortfolioLayout from './layouts/StylistPortfolioLayout';
 import DashboardPageLayout from './layouts/DashboardPageLayout';
 import Error404 from './components/Error404';
+import Loader from './components/Loader';
 
 import {CLIENT_ROUTES} from './common/commonVarList'
 
@@ -170,22 +171,21 @@ class App extends Component {
 
 
             <Router>
-                {(isLoading) ? '' : (
+                {(isLoading) ? (<Loader/>) : (
+                    <Switch>
+                        <Route exact path={CLIENT_ROUTES.HOME} component={HomePageLayout}/>
+                        <Route path={CLIENT_ROUTES.SEARCH} component={SearchPageLayout}/>
+                        <Route path={CLIENT_ROUTES.SIGN_IN} component={SignInPageLayout}/>
+                        <Route path={CLIENT_ROUTES.SIGN_OUT} render={() => { this.handleLogout(); return(<Redirect to={CLIENT_ROUTES.HOME}/>)}}/>
+                        {!isAuth && <Route path={CLIENT_ROUTES.SIGN_UP} component={SignUpPageLayout}/>}
+                        <Route path={CLIENT_ROUTES.FAQ} component={FAQPageLayout}/>
+                        <Route path={CLIENT_ROUTES.TERMS} component={TermsPageLayout}/>
+                        <Route path={CLIENT_ROUTES.STYLIST} component={StylistPortfolioLayout}/>
+                        {isAuth && <Route path={CLIENT_ROUTES.DASHBOARD} component={DashboardPageLayout}/>}
+                        {isAuth && <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>}
 
-                <Switch>
-                    <Route exact path={CLIENT_ROUTES.HOME} component={HomePageLayout}/>
-                    <Route path={CLIENT_ROUTES.SEARCH} component={SearchPageLayout}/>
-                    <Route path={CLIENT_ROUTES.SIGN_IN} component={SignInPageLayout}/>
-                    <Route path={CLIENT_ROUTES.SIGN_OUT} render={() => { this.handleLogout(); return(<Redirect to={CLIENT_ROUTES.HOME}/>)}}/>
-                    {!isAuth && <Route path={CLIENT_ROUTES.SIGN_UP} component={SignUpPageLayout}/>}
-                    <Route path={CLIENT_ROUTES.FAQ} component={FAQPageLayout}/>
-                    <Route path={CLIENT_ROUTES.TERMS} component={TermsPageLayout}/>
-                    <Route path={CLIENT_ROUTES.STYLIST} component={StylistPortfolioLayout}/>
-                    {isAuth && <Route path={CLIENT_ROUTES.DASHBOARD} component={DashboardPageLayout}/>}
-                    {isAuth && <Route exact path={CLIENT_ROUTES.DASHBOARD} render={() => (<Redirect to={CLIENT_ROUTES.DASHBOARD_HOME}/>)}/>}
-
-                    <Route path='*' component={Error404}/>
-                </Switch>
+                        <Route path='*' component={Error404}/>
+                    </Switch>
                 )}
 
             </Router>

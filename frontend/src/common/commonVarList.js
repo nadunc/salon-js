@@ -37,6 +37,8 @@ const SERVER_ROUTES = {
     SIGN_UP_SALON: SERVER_ROOT+'/salons',
     GET_STYLISTS: SERVER_ROOT+'/stylists',
     UPDATE_STYLIST: SERVER_ROOT+'/stylists',
+    ADD_TIMESLOT: SERVER_ROOT+'/timeslots',
+    STYLISTS_ALL_AVAILABLE_TIMESLOTS: SERVER_ROOT+'/timeslots/my/all',
 };
 
 const COMMON_ERROR_MESSAGE = 'Something went wrong. Please refresh the page';

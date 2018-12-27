@@ -1,13 +1,22 @@
 import React, {Component} from 'react'
-import {Button, Container, Icon, Image, Segment, Grid, Statistic, Divider} from 'semantic-ui-react'
+import {Button, Container, Icon, Image, Segment, Grid, Statistic, Divider, Message} from 'semantic-ui-react'
 import MainMenu from '../components/MainMenu';
 import Review from '../components/Review';
+import axios from "axios";
+import {COMMON_ERROR_MESSAGE, SERVER_ROUTES} from "../common/commonVarList";
+import * as commonMethods from "../common/commonMethods";
+import {Modal} from "semantic-ui-react/dist/commonjs/modules/Modal";
 
 
 class StylistPortfolioLayout extends Component {
 
-    state = {
-        stylist: []
+    constructor(props){
+        super(props)
+        this.state = {
+            stylist: {},
+            message: '',
+            isMessageVisible: false
+        }
     }
 
     componentDidMount() {
@@ -16,13 +25,32 @@ class StylistPortfolioLayout extends Component {
 
         // TODO
         // axios
-        let stylist = {work_as_stylist: true, work_as_educator: true, stylist_price: 100, educator_price: 200}
-        this.setState({stylist: stylist})
+        // let stylist = {work_as_stylist: true, work_as_educator: true, stylist_price: 100, educator_price: 200}
+
+        axios.get(SERVER_ROUTES.GET_STYLISTS+'/'+stylistId, ).then((res) => {
+            if (res.data.success) {
+                this.setState({stylist: res.data.data})
+            } else {
+                this.setMessage(true, false, COMMON_ERROR_MESSAGE);
+            }
+        }).catch((err) => {
+            this.setMessage(true, false, COMMON_ERROR_MESSAGE);
+        })
+    }
+
+    setMessage(visible, success, content) {
+        let message = <Message success={success} error={!success} header={success ? 'Success' : 'Error'}
+                               content={content} className='form-submit-success-message'/>;
+        this.setState({message: message, isMessageVisible: visible})
     }
 
 
     render() {
         let stylist = this.state.stylist
+        console.log(stylist.experience)
+        let message = this.state.message;
+        let isMessageVisible = this.state.isMessageVisible;
+
         return (
             <div>
                 <MainMenu/>
@@ -30,6 +58,9 @@ class StylistPortfolioLayout extends Component {
                 <Container>
 
                     {/*<h1 className='page-h1'>Portfolio</h1>*/}
+
+                    {isMessageVisible && message}
+
 
 
                     <Grid>
@@ -80,14 +111,10 @@ class StylistPortfolioLayout extends Component {
 
                     {/*<Segment>*/}
                     <h3>Experience</h3>
-                    <p>15 Years</p>
+                    {/*<p>{stylist.experience.description}</p>*/}
 
                     <h3>Bio</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
-                        Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar
-                        sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                        mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus
-                        pronin sapien nunc accuan eget.</p>
+                    <p>{stylist.bio}</p>
                     {/*</Segment>*/}
 
 

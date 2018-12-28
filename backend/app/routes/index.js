@@ -5,6 +5,8 @@ var SalonRoutes = require('./salon.routes');
 var UserRoutes = require('./user.routes');
 var TimeSlotRoutes = require('./timeslot.routes');
 var ExperienceRoutes = require('./experience.routes');
+var BookingRoutes = require('./booking.routes');
+var NotificationsRoutes = require('./notification.routes');
 
 var router = express.Router();
 
@@ -15,6 +17,8 @@ router.use('/salons', SalonRoutes);
 router.use('/users', UserRoutes);
 router.use('/timeslots', TimeSlotRoutes);
 router.use('/experiences', ExperienceRoutes);
+router.use('/bookings', BookingRoutes);
+router.use('/notifications', NotificationsRoutes);
 
 
 module.exports = router;

@@ -14,7 +14,7 @@ class StylistContainer extends Component {
 
     render() {
         let timeslots = this.props.timeslots.map((timeslot, key)=>{
-            return <StylistCard timeslot={timeslot} key={key}/>
+            return <StylistCard timeslot={timeslot} key={key} auth={this.props.auth}/>
         });
 
         return (

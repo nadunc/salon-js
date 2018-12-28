@@ -4,6 +4,7 @@ import {Container, Form, Grid, Menu, Segment} from 'semantic-ui-react'
 import axios from 'axios'
 
 import {SERVER_ROUTES, CLIENT_ROUTES} from '../common/commonVarList'
+import Footer from "../components/Footer";
 
 class SignUpPageLayout extends Component {
     state = {
@@ -121,7 +122,7 @@ class SignUpPageLayout extends Component {
             <div>
                 <MainMenu/>
 
-                <Container>
+                <Container className='main-content-container'>
 
                     <h1 className='text-center page-h1'>Sign Up</h1>
 
@@ -238,6 +239,7 @@ class SignUpPageLayout extends Component {
                     </Grid>
 
                 </Container>
+                <Footer/>
             </div>
         );
     };

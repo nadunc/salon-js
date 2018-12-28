@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import MainMenu from '../components/MainMenu';
 import {Container, Accordion, Icon} from 'semantic-ui-react'
+import Footer from "../components/Footer";
 
 
 
@@ -25,7 +26,7 @@ class FAQPageLayout extends Component {
             <div>
                 <MainMenu/>
 
-                <Container>
+                <Container className='main-content-container'>
 
                     <h1 className='page-h1'>Frequently Asked Questions (FAQ)</h1>
 
@@ -150,6 +151,7 @@ class FAQPageLayout extends Component {
                     </Accordion>
 
                 </Container>
+                <Footer/>
             </div>
         );
     };

@@ -49,7 +49,8 @@ passport.use('anyone_logged', new JWTstrategy({
     //secret we used to sign our JWT
     secretOrKey: 'top_secret',
     //we expect the user to send the token as a query paramater with the name 'secret_token'
-    jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+    // jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+    jwtFromRequest: ExtractJWT.fromBodyField('token')
 }, async (token, done) => {
     try {
         //Pass the user details to the next middleware
@@ -64,7 +65,7 @@ passport.use('stylist_only', new JWTstrategy({
     //secret we used to sign our JWT
     secretOrKey: 'top_secret',
     //we expect the user to send the token as a query paramater with the name 'secret_token'
-    jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+    jwtFromRequest: ExtractJWT.fromBodyField('token')
 }, async (token, done) => {
     try {
         if (token.user.user_role_id !== CONSTANTS.USER_ROLE_ID_STYLIST) {
@@ -82,7 +83,7 @@ passport.use('salon_only', new JWTstrategy({
     //secret we used to sign our JWT
     secretOrKey: 'top_secret',
     //we expect the user to send the token as a query paramater with the name 'secret_token'
-    jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+    jwtFromRequest: ExtractJWT.fromBodyField('token')
 }, async (token, done) => {
     try {
         if (token.user.user_role_id !== CONSTANTS.USER_ROLE_ID_SALON) {
@@ -100,7 +101,7 @@ passport.use('admin_only', new JWTstrategy({
     //secret we used to sign our JWT
     secretOrKey: 'top_secret',
     //we expect the user to send the token as a query paramater with the name 'secret_token'
-    jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+    jwtFromRequest: ExtractJWT.fromBodyField('token')
 }, async (token, done) => {
     try {
         if (token.user.user_role_id !== CONSTANTS.USER_ROLE_ID_ADMIN) {

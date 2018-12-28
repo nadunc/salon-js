@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import MainMenu from '../components/MainMenu';
 import {Container, Segment} from 'semantic-ui-react'
+import Footer from "../components/Footer";
 
 
 class TermsPageLayout extends Component {
@@ -11,7 +12,7 @@ class TermsPageLayout extends Component {
             <div>
                 <MainMenu/>
 
-                <Container>
+                <Container className='main-content-container'>
 
                     <h1 className='page-h1'>Terms & Conditions</h1>
 
@@ -65,6 +66,7 @@ class TermsPageLayout extends Component {
 
 
                 </Container>
+                <Footer/>
             </div>
         );
     };

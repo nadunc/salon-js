@@ -23,6 +23,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 
 import HomePageLayout from './layouts/HomepageLayout';
+import HomePageLayout1 from './layouts/HomepageLayout1';
 import SearchPageLayout from './layouts/SearchPageLayout';
 import SignInPageLayout from './layouts/SignInPageLayout';
 import SignUpPageLayout from './layouts/SignUpPageLayout';
@@ -173,7 +174,9 @@ class App extends Component {
             <Router>
                 {(isLoading) ? (<Loader/>) : (
                     <Switch>
-                        <Route exact path={CLIENT_ROUTES.HOME} component={HomePageLayout}/>
+                        {/*<Route exact path={CLIENT_ROUTES.HOME} component={HomePageLayout}/>*/}
+                        <Route exact path='/home1' component={HomePageLayout}/>
+                        <Route exact path={CLIENT_ROUTES.HOME} component={HomePageLayout1}/>
                         <Route path={CLIENT_ROUTES.SEARCH} component={SearchPageLayout}/>
                         <Route path={CLIENT_ROUTES.SIGN_IN} component={SignInPageLayout}/>
                         <Route path={CLIENT_ROUTES.SIGN_OUT} render={() => { this.handleLogout(); return(<Redirect to={CLIENT_ROUTES.HOME}/>)}}/>

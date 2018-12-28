@@ -17,6 +17,7 @@ const CLIENT_ROUTES = {
     DASHBOARD_CALENDAR: '/dashboard/calendar',
     DASHBOARD_PORTFOLIO: '/dashboard/portfolio',
     DASHBOARD_BOOKINGS: '/dashboard/bookings',
+    DASHBOARD_BOOKING_REQUESTS: '/dashboard/booking-requests',
     DASHBOARD_SETTINGS: '/dashboard/settings',
     DASHBOARD_PREFERENCES: '/dashboard/preferences',
     DASHBOARD_CHANGE_PASSWORD: '/dashboard/change-password',
@@ -39,6 +40,12 @@ const SERVER_ROUTES = {
     UPDATE_STYLIST: SERVER_ROOT+'/stylists',
     ADD_TIMESLOT: SERVER_ROOT+'/timeslots',
     STYLISTS_ALL_AVAILABLE_TIMESLOTS: SERVER_ROOT+'/timeslots/my/all',
+    GET_BOOKING_REQUESTS: SERVER_ROOT+'/bookings/requests',
+    GET_NOTIFICATIONS: SERVER_ROOT+'/notifications',
+    ADD_BOOKING: SERVER_ROOT+'/bookings',
+    REJECT_BOOKING: SERVER_ROOT+'/bookings/reject',
+    ACCEPT_BOOKING: SERVER_ROOT+'/bookings/accept',
+
 };
 
 const COMMON_ERROR_MESSAGE = 'Something went wrong. Please refresh the page';

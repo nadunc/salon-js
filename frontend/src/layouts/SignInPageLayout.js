@@ -9,6 +9,7 @@ import {SERVER_ROUTES, CLIENT_ROUTES} from '../common/commonVarList'
 import connect from "react-redux/es/connect/connect";
 import * as userActions from "../actions/authActions";
 import {AuthenticationTypes} from "../types/index";
+import Footer from "../components/Footer";
 
 
 class SignInPageLayout extends Component {
@@ -51,7 +52,7 @@ class SignInPageLayout extends Component {
             <div>
                 <MainMenu/>
 
-                <Container>
+                <Container className='main-content-container'>
 
                     <h1 className='text-center page-h1'>Sign In</h1>
 
@@ -88,8 +89,8 @@ class SignInPageLayout extends Component {
                             <Grid.Column width={5}/>
                         </Grid.Row>
                     </Grid>
-
                 </Container>
+                <Footer/>
             </div>
         );
     };

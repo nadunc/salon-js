@@ -1,21 +1,28 @@
 module.exports = {
 
     // Success
-    STYLIST_LIST_RETRIEVE_SUCCESS : 'Stylists List Successfully Retrieved.',
-    SALON_LIST_RETRIEVE_SUCCESS : 'Salons List Successfully Retrieved.',
+    STYLIST_LIST_RETRIEVE_SUCCESS : 'Stylists list successfully retrieved.',
+    SALON_LIST_RETRIEVE_SUCCESS : 'Salons list successfully retrieved.',
     STYLISTS_AVAILABLE_SLOTS_FETCH_SUCCESS : 'Successfully retrieved available time slots.',
-    EXPERIENCE_LIST_RETRIEVE_SUCCESS : 'Experience List Successfully Retrieved.',
+    EXPERIENCE_LIST_RETRIEVE_SUCCESS : 'Experience list successfully retrieved.',
+    BOOKING_REQUESTS_LIST_RETRIEVE_SUCCESS : 'Booking requests list successfully retrieved.',
+    NOTIFICATION_LIST_RETRIEVE_SUCCESS : 'Notifications successfully retrieved.',
 
 
-    STYLIST_RETRIEVE_SUCCESS : 'Stylist Successfully Retrieved.',
-    SALON_RETRIEVE_SUCCESS : 'Salon Successfully Retrieved.',
+    STYLIST_RETRIEVE_SUCCESS : 'Stylist successfully retrieved.',
+    SALON_RETRIEVE_SUCCESS : 'Salon successfully retrieved.',
 
-    STYLIST_ADD_SUCCESS : 'Stylist Successfully Registered.',
-    SALON_ADD_SUCCESS : 'Salon Successfully Registered.',
+    STYLIST_ADD_SUCCESS : 'Stylist successfully registered.',
+    SALON_ADD_SUCCESS : 'Salon successfully registered.',
     TIMESLOT_ADD_SUCCESS : 'Successfully added available time slot.',
     TIMESLOT_IS_NOT_AVAILABLE : 'Failed to add time slot. Time slot is already filled.',
 
+    BOOKING_ADD_SUCCESS : 'Successfully added booking.',
+
     STYLIST_UPDATE_SUCCESS : 'Successfully updated.',
+    NOTIFICATION_UPDATE_SUCCESS : 'Successfully updated.',
+
+    BOOKING_REJECT_SUCCESS : 'Booking has been rejected.',
 
 
     USER_PASSWORD_RESET_CODE_SENT : 'Password reset link sent. Please check you mailbox.',

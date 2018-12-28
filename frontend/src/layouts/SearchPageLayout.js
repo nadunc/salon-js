@@ -6,6 +6,8 @@ import axios from 'axios'
 
 import {SERVER_ROUTES} from '../common/commonVarList'
 import SearchBox from "../components/SearchBox";
+import connect from "react-redux/es/connect/connect";
+import Footer from "../components/Footer";
 
 class SearchPageLayout extends Component {
 
@@ -71,19 +73,30 @@ class SearchPageLayout extends Component {
             <div>
                 <MainMenu/>
 
-                <Container>
+                <Container className='main-content-container'>
 
                     <SearchBox search={this.search.bind(this)}/>
 
                     <h1 className="page-h1">Search Results</h1>
 
-                    <StylistContainer timeslots={this.state.timeslots}/>
+                    <StylistContainer timeslots={this.state.timeslots} auth={this.props.auth}/>
 
                 </Container>
+                <Footer/>
             </div>
         );
     };
 
 };
 
-export default SearchPageLayout;
+// export default SearchPageLayout;
+
+
+function mapStateToProps(state) {
+
+    return {
+        auth: state.auth
+    };
+}
+
+export default connect(mapStateToProps)(SearchPageLayout);

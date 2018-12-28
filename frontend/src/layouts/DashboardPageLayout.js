@@ -15,6 +15,7 @@ import StylistContentSettings from '../components/stylistControlPanel/StylistCon
 import StylistContentBookings from '../components/stylistControlPanel/StylistContentBookings';
 import StylistContentPortfolio from '../components/stylistControlPanel/StylistContentPortfolio';
 import StylistContentCalendar from '../components/stylistControlPanel/StylistContentCalendar';
+import StylistContentBookingRequests from '../components/stylistControlPanel/StylistContentBookingRequests';
 
 
 import SalonContentDashboard from '../components/salonControlPanel/SalonContentDashboard';
@@ -32,6 +33,7 @@ import AdminContentChangePassword from '../components/adminControlPanel/AdminCon
 import connect from "react-redux/es/connect/connect";
 import * as commonMethods from '../common/commonMethods'
 import {AuthenticationTypes} from "../types";
+import Footer from "../components/Footer";
 
 
 class DashboardPageLayout extends Component {
@@ -47,6 +49,7 @@ class DashboardPageLayout extends Component {
                     <Route path={CLIENT_ROUTES.DASHBOARD_HOME} render={() => (<StylistContentDashboard auth={this.props.auth}/>)}/>
                     <Route path={CLIENT_ROUTES.DASHBOARD_CALENDAR} render={() => (<StylistContentCalendar auth={this.props.auth}/>)}/>
                     <Route path={CLIENT_ROUTES.DASHBOARD_PORTFOLIO} render={() => (<StylistContentPortfolio auth={this.props.auth}/>)}/>
+                    <Route path={CLIENT_ROUTES.DASHBOARD_BOOKING_REQUESTS} render={() => (<StylistContentBookingRequests auth={this.props.auth}/>)}/>
                     <Route path={CLIENT_ROUTES.DASHBOARD_BOOKINGS} render={() => (<StylistContentBookings auth={this.props.auth}/>)}/>
                     <Route path={CLIENT_ROUTES.DASHBOARD_SETTINGS} render={() => (<StylistContentSettings auth={this.props.auth}/>)}/>
                     <Route path={CLIENT_ROUTES.DASHBOARD_PREFERENCES} render={() => (<StylistContentPreferences auth={this.props.auth}/>)}/>
@@ -111,7 +114,7 @@ class DashboardPageLayout extends Component {
             <div>
                 <MainMenu/>
 
-                <Container>
+                <Container className='main-content-container'>
 
                     <Grid>
                         <Grid.Row>
@@ -132,6 +135,8 @@ class DashboardPageLayout extends Component {
 
 
                 </Container>
+
+                <Footer/>
             </div>
         );
     };

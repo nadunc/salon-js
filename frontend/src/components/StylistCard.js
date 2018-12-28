@@ -2,16 +2,32 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {Button, Card, Image, Grid, Statistic, Icon} from "semantic-ui-react";
 import {CLIENT_ROUTES} from "../common/commonVarList";
+import AddBookingModal from "./AddBookingModal";
+import * as commonMethods from "../common/commonMethods";
 
 class StylistCard extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            isModalVisible: false,
+        }
+
+        this.addBookingConfirmation = this.addBookingConfirmation.bind(this)
+        this.closeModal = this.closeModal.bind(this)
+    }
+
+    closeModal() {
+        this.setState({isModalVisible: false})
+    }
+
+    addBookingConfirmation(){
+
     }
 
     render() {
         let stylist = this.props.timeslot.stylist;
-
+        let auth = this.props.auth
 
         let role;
         if (stylist.work_as_stylist && stylist.work_as_educator) {
@@ -76,9 +92,27 @@ class StylistCard extends Component {
 
                                     <Grid.Row>
                                         <Grid.Column width={16}>
-                                            <Button color="green" fluid as={Link} to={CLIENT_ROUTES.STYLIST.replace(':id', stylist.id)}>Hire</Button>
+                                            <Button basic fluid as={Link} to={CLIENT_ROUTES.STYLIST.replace(':id', stylist.id)}>Portfolio</Button>
                                         </Grid.Column>
                                     </Grid.Row>
+
+                                    {auth.isAuth && (commonMethods.isUserTypeSalon(auth.user.userType)) && (
+                                    <Grid.Row>
+                                        <Grid.Column width={16}>
+                                            <Button color="green" fluid onClick={()=>{this.setState({isModalVisible:true})}}>Hire</Button>
+                                        </Grid.Column>
+                                    </Grid.Row>
+                                    )}
+
+                                    {!auth.isAuth && (
+                                        <Grid.Row>
+                                            <Grid.Column width={16}>
+                                                <Button color="green" fluid as={Link} to={CLIENT_ROUTES.SIGN_IN}>Hire</Button>
+                                            </Grid.Column>
+                                        </Grid.Row>
+                                    )}
+
+
                                 </Grid>
                             </Grid.Column>
                         </Grid.Row>
@@ -86,7 +120,18 @@ class StylistCard extends Component {
 
                 </Card.Content>
 
+
+
+                <AddBookingModal open={this.state.isModalVisible} closeModal={this.closeModal.bind(this)}
+                                 timeslot={this.props.timeslot} addBookingConfirmation={this.addBookingConfirmation.bind(this)}
+                                 auth={this.props.auth}/>
             </Card>
+
+
+
+
+
+
         );
     };
 }

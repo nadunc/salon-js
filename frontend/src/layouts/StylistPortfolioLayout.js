@@ -2,20 +2,24 @@ import React, {Component} from 'react'
 import {Button, Container, Icon, Image, Segment, Grid, Statistic, Divider, Message} from 'semantic-ui-react'
 import MainMenu from '../components/MainMenu';
 import Review from '../components/Review';
+import Loader from '../components/Loader';
 import axios from "axios";
 import {COMMON_ERROR_MESSAGE, SERVER_ROUTES} from "../common/commonVarList";
 import * as commonMethods from "../common/commonMethods";
 import {Modal} from "semantic-ui-react/dist/commonjs/modules/Modal";
+import Footer from "../components/Footer";
 
 
 class StylistPortfolioLayout extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             stylist: {},
             message: '',
-            isMessageVisible: false
+            isMessageVisible: false,
+            isLoading: true,
+            isLoaded: false
         }
     }
 
@@ -27,13 +31,17 @@ class StylistPortfolioLayout extends Component {
         // axios
         // let stylist = {work_as_stylist: true, work_as_educator: true, stylist_price: 100, educator_price: 200}
 
-        axios.get(SERVER_ROUTES.GET_STYLISTS+'/'+stylistId, ).then((res) => {
+        axios.get(SERVER_ROUTES.GET_STYLISTS + '/' + stylistId,).then((res) => {
             if (res.data.success) {
-                this.setState({stylist: res.data.data})
+                this.setState({
+                    stylist: res.data.data, isLoading: false, isLoaded: true
+                })
             } else {
+                this.setState({isLoading: false})
                 this.setMessage(true, false, COMMON_ERROR_MESSAGE);
             }
         }).catch((err) => {
+            this.setState({isLoading: false})
             this.setMessage(true, false, COMMON_ERROR_MESSAGE);
         })
     }
@@ -47,20 +55,35 @@ class StylistPortfolioLayout extends Component {
 
     render() {
         let stylist = this.state.stylist
-        console.log(stylist.experience)
+
         let message = this.state.message;
         let isMessageVisible = this.state.isMessageVisible;
+        let isLoading = this.state.isLoading
+        let isLoaded = this.state.isLoaded
 
-        return (
-            <div>
+
+        let content = (isLoading? <Loader/>:'')
+        content = ((!isLoaded && !isLoading && isMessageVisible) ?  message:'')
+
+        if(isLoaded){
+            let role;
+            if (stylist.work_as_stylist && stylist.work_as_educator) {
+                role = "Stylist / Educator"
+            } else if (stylist.work_as_educator) {
+                role = "Educator"
+            } else {
+                role = "Stylist"
+            }
+
+            content = (<div>
+
                 <MainMenu/>
 
-                <Container>
+                <Container className='main-content-container'>
 
                     {/*<h1 className='page-h1'>Portfolio</h1>*/}
 
                     {isMessageVisible && message}
-
 
 
                     <Grid>
@@ -70,9 +93,9 @@ class StylistPortfolioLayout extends Component {
                             </Grid.Column>
                             <Grid.Column width={11}>
 
-                                <p className="portfolio-name">Nadun Chamikara</p>
+                                <p className="portfolio-name">{stylist.firstname} {stylist.lastname}</p>
 
-                                <p>Stylist / Educator</p>
+                                <p>{role}</p>
 
 
                                 <Grid>
@@ -102,7 +125,7 @@ class StylistPortfolioLayout extends Component {
                                     {/*<Statistic.Label>Average Rating</Statistic.Label>*/}
                                 </Statistic>
 
-                                <Button color="green" fluid>Hire</Button>
+                                {/*<Button color="green" fluid>Hire</Button>*/}
 
                             </Grid.Column>
                         </Grid.Row>
@@ -111,7 +134,7 @@ class StylistPortfolioLayout extends Component {
 
                     {/*<Segment>*/}
                     <h3>Experience</h3>
-                    {/*<p>{stylist.experience.description}</p>*/}
+                    <p>{stylist.experience.description}</p>
 
                     <h3>Bio</h3>
                     <p>{stylist.bio}</p>
@@ -134,7 +157,12 @@ class StylistPortfolioLayout extends Component {
                     </Segment>
 
                 </Container>
-            </div>
+                <Footer/>
+            </div>)
+        }
+
+        return(
+            content
         );
     };
 

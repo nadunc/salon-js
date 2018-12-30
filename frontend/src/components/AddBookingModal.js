@@ -15,9 +15,11 @@ class AddAvailableSlotModal extends Component {
             date: props.timeslot.date,
             start: '',
             end: '',
+            role: '',
 
             dropdownFromValues: [],
             dropdownToValues: [],
+            dropdownRoleValues: [],
 
 
             message: '',
@@ -52,6 +54,7 @@ class AddAvailableSlotModal extends Component {
     //     })
     // }
 
+
     addBooking() {
 
         let booking = {
@@ -61,7 +64,7 @@ class AddAvailableSlotModal extends Component {
             end: this.state.end,
             timeslot_id: this.props.timeslot.id,
             stylist_id: this.props.timeslot.stylist.id,
-            role: 1
+            role: this.state.role
         }
 
 
@@ -86,7 +89,7 @@ class AddAvailableSlotModal extends Component {
     }
 
 
-    setFromAndTo() {
+    setDropdownValues() {
         let start = this.props.timeslot.start;
         let end = this.props.timeslot.end;
 
@@ -101,10 +104,12 @@ class AddAvailableSlotModal extends Component {
                 return (parseInt(to.value.substr(0, 2)) <= parseInt(end.substr(0, 2))) && (parseInt(to.value.substr(0, 2)) > parseInt(start.substr(0, 2)));
             })
         })
+
+        this.setState({dropdownRoleValues: dropdownValues.Roles})
     }
 
     componentDidMount() {
-        this.setFromAndTo()
+        this.setDropdownValues()
     }
 
     render() {
@@ -165,6 +170,22 @@ class AddAvailableSlotModal extends Component {
                                         <Form.Select fluid options={this.state.dropdownToValues} placeholder='To'
                                                      name='end'
                                                      onChange={this.handleChange.bind(this)} value={this.state.end}/>
+
+
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
+                        </Form.Field>
+                        <Form.Field>
+                            <Grid>
+                                <Grid.Row>
+                                    <Grid.Column width={6}>
+                                        <label>Hire as</label>
+                                    </Grid.Column>
+                                    <Grid.Column width={10}>
+                                        <Form.Select fluid options={this.state.dropdownRoleValues} placeholder='Role'
+                                                     name='role'
+                                                     onChange={this.handleChange.bind(this)} value={this.state.role}/>
 
 
                                     </Grid.Column>

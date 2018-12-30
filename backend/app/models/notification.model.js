@@ -17,6 +17,6 @@ const NotificationModel = sequelize.define('notification', {
 
 NotificationModel.belongsTo(UserModel);
 
-NotificationModel.sync();
+// NotificationModel.sync();
 
 module.exports = NotificationModel;

@@ -13,13 +13,14 @@ const UserRoleModel = sequelize.define('user_role', {
 
 // force: true will drop the table if it already exists
 // UserRoleModel.sync({force: true}).then(() => {
-UserRoleModel.sync().then(() => {
-    // Table created
-    // return TestModel.create({
-    //     firstname: 'John',
-    //     lastname: 'Hancock'
-    // });
-    return UserRoleModel.bulkCreate([{id: 1, name:'Admin'}, {id: 2, name:'Stylist'}, {id: 3, name:'Salon'}]);
-});
+
+// UserRoleModel.sync().then(() => {
+//     // Table created
+//     // return TestModel.create({
+//     //     firstname: 'John',
+//     //     lastname: 'Hancock'
+//     // });
+//     return UserRoleModel.bulkCreate([{id: 1, name:'Admin'}, {id: 2, name:'Stylist'}, {id: 3, name:'Salon'}]);
+// });
 
 module.exports = UserRoleModel;

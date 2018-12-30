@@ -55,6 +55,6 @@ BookingModel.belongsTo(SalonModel);
 BookingModel.belongsTo(StylistModel);
 
 
-BookingModel.sync();
+// BookingModel.sync();
 
 module.exports = BookingModel;

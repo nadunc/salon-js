@@ -69,6 +69,6 @@ TimeSlotModel.belongsTo(StylistModel);
 //     });
 // });
 
-TimeSlotModel.sync();
+// TimeSlotModel.sync();
 
 module.exports = TimeSlotModel;

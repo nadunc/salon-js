@@ -66,10 +66,15 @@ const Ratings = [
     {key: 'rating_dw_5', text: '5 Stars', value: '5'}
 ]
 
+const Roles = [
+    {key: 'stylist', text: 'Stylist', value: '1'},
+    {key: 'educator', text: 'Educator', value: '2'}
+]
 
 export default {
     FromTimes,
     ToTimes,
     Prices,
-    Ratings
+    Ratings,
+    Roles
 }

@@ -18,11 +18,13 @@ module.exports = {
     TIMESLOT_IS_NOT_AVAILABLE : 'Failed to add time slot. Time slot is already filled.',
 
     BOOKING_ADD_SUCCESS : 'Successfully added booking.',
+    BOOKING_TIME_CONFLICT : 'Booking time is not available.',
 
     STYLIST_UPDATE_SUCCESS : 'Successfully updated.',
     NOTIFICATION_UPDATE_SUCCESS : 'Successfully updated.',
 
     BOOKING_REJECT_SUCCESS : 'Booking has been rejected.',
+    BOOKING_ACCEPT_SUCCESS : 'Booking has been accepted.',
 
 
     USER_PASSWORD_RESET_CODE_SENT : 'Password reset link sent. Please check you mailbox.',

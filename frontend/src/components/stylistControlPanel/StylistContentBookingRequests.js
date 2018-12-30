@@ -24,7 +24,7 @@ class StylistContentBookings extends Component {
             if (res.data.success) {
                 this.setState({bookings: res.data.data})
             } else {
-                this.setMessage(true, false, COMMON_ERROR_MESSAGE);
+                this.setMessage(true, false, res.data.message);
             }
         }).catch((err) => {
             this.setMessage(true, false, COMMON_ERROR_MESSAGE);
@@ -38,7 +38,16 @@ class StylistContentBookings extends Component {
     }
 
     acceptBooking(e, bookingId) {
-        console.log(bookingId)
+        axios.patch(SERVER_ROUTES.ACCEPT_BOOKING, {token: this.props.auth.user.token, booking_id:bookingId}).then((res) => {
+            if (res.data.success) {
+                this.setMessage(true, true, res.data.message);
+                this.loadBookingRequests();
+            } else {
+                this.setMessage(true, false, res.data.message);
+            }
+        }).catch((err) => {
+            this.setMessage(true, false, COMMON_ERROR_MESSAGE);
+        })
     }
 
     rejectBooking(e, bookingId) {
@@ -47,7 +56,7 @@ class StylistContentBookings extends Component {
                 this.setMessage(true, true, res.data.message);
                 this.loadBookingRequests();
             } else {
-                this.setMessage(true, false, COMMON_ERROR_MESSAGE);
+                this.setMessage(true, false, res.data.message);
             }
         }).catch((err) => {
             this.setMessage(true, false, COMMON_ERROR_MESSAGE);

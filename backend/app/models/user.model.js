@@ -42,7 +42,7 @@ UserModel.belongsTo(UserRoleModel);
 //     });
 // });
 
-UserModel.sync();
+// UserModel.sync();
 
 
 module.exports = UserModel;

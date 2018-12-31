@@ -6,6 +6,7 @@ module.exports = {
     STYLISTS_AVAILABLE_SLOTS_FETCH_SUCCESS : 'Successfully retrieved available time slots.',
     EXPERIENCE_LIST_RETRIEVE_SUCCESS : 'Experience list successfully retrieved.',
     BOOKING_REQUESTS_LIST_RETRIEVE_SUCCESS : 'Booking requests list successfully retrieved.',
+    BOOKING_LIST_RETRIEVE_SUCCESS : 'Booking list successfully retrieved.',
     NOTIFICATION_LIST_RETRIEVE_SUCCESS : 'Notifications successfully retrieved.',
 
 

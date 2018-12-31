@@ -18,6 +18,7 @@ var router = express.Router();
 
 router.post('/', passport.authenticate('salon_only', {session: false}), BookingController.create);
 router.post('/requests', passport.authenticate('stylist_only', {session: false}), BookingController.findBookingRequestsByStylist);
+router.post('/stylist', passport.authenticate('stylist_only', {session: false}), BookingController.findBookingsByStylist);
 router.patch('/reject', passport.authenticate('stylist_only', {session: false}), BookingController.reject);
 router.patch('/accept', passport.authenticate('stylist_only', {session: false}), BookingController.accept);
 

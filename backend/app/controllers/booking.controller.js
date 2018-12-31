@@ -8,6 +8,25 @@ const NotificationModel = require('../models/notification.model');
 var sequelize = require('../database');
 
 
+exports.findBookingsByStylist = (req, res) => {
+
+    StylistModel.findOne({where: {user_id: req.user.id}}).then((stylist) => {
+
+        BookingModel.findAll({
+            where: {stylist_id: stylist.id, accepted: true},
+            include: [SalonModel, StylistModel]
+        }).then((bookings) => {
+            res.json(commonMethods.createResponse(true, bookings, responseMessages.BOOKING_LIST_RETRIEVE_SUCCESS));
+        }).catch((err) => {
+            res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+        });
+
+    }).catch((err) => {
+        res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+    })
+
+};
+
 
 exports.findBookingRequestsByStylist = (req, res) => {
 

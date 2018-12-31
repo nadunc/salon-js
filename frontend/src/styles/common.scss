@@ -28,5 +28,12 @@ label{
 }
 
 .main-content-container{
-  min-height: 550px;
+  min-height: 570px;
+}
+
+.ui.form .disabled.field {
+  opacity: 0.9;
+}
+.ui.disabled.input{
+  opacity: 0.9;
 }

@@ -29,9 +29,9 @@ class HomepageLayout extends Component {
 
             <div className="pusher main-content-container">
                 <div className="ui inverted vertical masthead center aligned segment home-header">
-
+                    <div className='home-bg'>
                     <div className="ui text container">
-                        <h1 className="ui inverted header">
+                        <h1 className="ui inverted header home-header-title">
                             Search Stylist
                         </h1>
                         {/*<h2>Do whatever you want when you want to.</h2>*/}
@@ -51,7 +51,7 @@ class HomepageLayout extends Component {
                         </Grid>
 
                     </div>
-
+                    </div>
                 </div>
 
 
@@ -63,8 +63,8 @@ class HomepageLayout extends Component {
                                     <Header as='h3' style={{fontSize: '2em'}}>
                                         Want to become a stylist?
                                     </Header>
-                                    <Image bordered rounded centered size='large'
-                                           src='/images/wireframe/white-image.png'/>
+                                    {/*<Image bordered rounded centered size='large'*/}
+                                           {/*src='/images/wireframe/white-image.png'/>*/}
                                     <p style={{fontSize: '1.33em'}}>
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
                                         laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
@@ -76,8 +76,8 @@ class HomepageLayout extends Component {
                                     <Header as='h3' style={{fontSize: '2em'}}>
                                         Looking for hire stylists?
                                     </Header>
-                                    <Image bordered rounded centered size='large'
-                                           src='/images/wireframe/white-image.png'/>
+                                    {/*<Image bordered rounded centered size='large'*/}
+                                           {/*src='/images/wireframe/white-image.png'/>*/}
                                     <p style={{fontSize: '1.33em'}}>
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
                                         laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.

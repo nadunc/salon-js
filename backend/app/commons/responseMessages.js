@@ -8,6 +8,8 @@ module.exports = {
     BOOKING_REQUESTS_LIST_RETRIEVE_SUCCESS : 'Booking requests list successfully retrieved.',
     BOOKING_LIST_RETRIEVE_SUCCESS : 'Booking list successfully retrieved.',
     NOTIFICATION_LIST_RETRIEVE_SUCCESS : 'Notifications successfully retrieved.',
+    FEEDBACK_LIST_RETRIEVE_SUCCESS : 'Feedbacks successfully retrieved.',
+    RATING_RETRIEVE_SUCCESS : 'Rating successfully retrieved.',
 
 
     STYLIST_RETRIEVE_SUCCESS : 'Stylist successfully retrieved.',

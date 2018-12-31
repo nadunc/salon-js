@@ -37,6 +37,8 @@ const SERVER_ROUTES = {
     SIGN_UP_STYLIST: SERVER_ROOT+'/stylists',
     SIGN_UP_SALON: SERVER_ROOT+'/salons',
     GET_STYLISTS: SERVER_ROOT+'/stylists',
+    GET_FEEDBACKS_BY_STYLIST: SERVER_ROOT+'/feedbacks',
+    GET_RATING_BY_STYLIST: SERVER_ROOT+'/feedbacks/:id/rating',
     UPDATE_STYLIST: SERVER_ROOT+'/stylists',
     ADD_TIMESLOT: SERVER_ROOT+'/timeslots',
     STYLISTS_ALL_AVAILABLE_TIMESLOTS: SERVER_ROOT+'/timeslots/my/all',
@@ -46,6 +48,7 @@ const SERVER_ROUTES = {
     REJECT_BOOKING: SERVER_ROOT+'/bookings/reject',
     ACCEPT_BOOKING: SERVER_ROOT+'/bookings/accept',
     GET_BOOKINGS_BY_STYLIST: SERVER_ROOT+'/bookings/stylist',
+    GET_BOOKINGS_BY_SALON: SERVER_ROOT+'/bookings/salon',
 
 };
 

@@ -20,19 +20,22 @@ class StylistBooking extends Component {
                     <Grid divided>
                         <Grid.Row>
                             <Grid.Column width={2} className="text-center">
-                                    <p className="review-salon-name">
+                                    <h5 className="review-salon-name">
                                         {moment(booking.date).format('ll')}
-                                    </p>
+                                    </h5>
                             </Grid.Column>
-                            <Grid.Column width={3} className="text-center">
-                                <p>
+                            <Grid.Column width={4} className="text-center">
+                                <h5>
                                     {moment(booking.date+' '+booking.start).format('LT')} - {moment(booking.date+' '+booking.end).format('LT')}
-                                </p>
+                                </h5>
                             </Grid.Column>
-                            <Grid.Column width={8}>
+                            <Grid.Column width={7}>
                                 <Card.Description>
-                                    <p>
+                                    <h3>
                                         {booking.salon.name}
+                                    </h3>
+                                    <p>Hired as :
+                                        { booking.role===1?' Stylist':'Educator'}
                                     </p>
 
                                     {/*<p className="stylist-card-rating">*/}
@@ -63,9 +66,9 @@ class StylistBooking extends Component {
                             </Grid.Column>
                             <Grid.Column width={3} className="text-center">
                                 {/*<p className="review-salon-name">Dec 20, 2018</p>*/}
-                                    <p>Hired as<br/>
-                                        { booking.role===1?'Stylist':'Educator'}
-                                    </p>
+                                <p className='stylist-card-price'>
+                                    ${ booking.price}
+                                </p>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>

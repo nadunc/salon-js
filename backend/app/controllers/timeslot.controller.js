@@ -22,19 +22,50 @@ exports.findAvailableStylistsByTimeRange = (req, res) => {
     let end = req.body.end;
 
     // TODO : rating & price
-    // let price = req.body.price;
+    let price = req.body.price;
     // let rating = req.body.rating;
+    // let experience = req.body.experience;
+    let role = req.body.role;
+
+    // res.json({
+    //     date: date,
+    //     start: start,
+    //     end: end,
+    //     price: price,
+    //     rating: rating,
+    //     experience:experience,
+    //     role: role
+    // })
+
+    // let experience_filter = (experience >= 4) ? experience:
+    let experience_filter = 0;
+        if(parseInt(role) === 2){
+            experience_filter = 4
+        }
 
 
-    // TimeSlotModel.findAll({include:[{ model: StylistModel, where: { active: true }}]}).then(timeslots => {
-    TimeSlotModel.findAll({
-        where: {date: date, start: {[Op.lte]: start}, end: {[Op.gte]: end}},
-        include: [{model: StylistModel}]
-    }).then(timeslots => {
-        res.json(commonMethods.createResponse(true, timeslots, responseMessages.STYLIST_LIST_RETRIEVE_SUCCESS));
-    }).catch(err => {
-        res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
-    });
+        // TimeSlotModel.findAll({include:[{ model: StylistModel, where: { active: true }}]}).then(timeslots => {
+        TimeSlotModel.findAll({
+            where: {
+                date: date,
+                start: {[Op.lte]: start},
+                end: {[Op.gte]: end},
+                // experience_id : {[Op.gte]: experience_filter}
+            },
+            include: [{model: StylistModel}]
+        }).then(timeslots => {
+            // res.json(commonMethods.createResponse(true, timeslots, responseMessages.STYLIST_LIST_RETRIEVE_SUCCESS));
+
+            res.json(commonMethods.createResponse(true,
+                timeslots.filter((timeslot)=>{
+                    return timeslot.stylist.experience_id > experience_filter
+                })
+                , responseMessages.STYLIST_LIST_RETRIEVE_SUCCESS));
+
+        }).catch(err => {
+            res.json(err)
+            res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+        });
 };
 
 

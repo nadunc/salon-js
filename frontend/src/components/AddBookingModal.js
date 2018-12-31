@@ -16,6 +16,7 @@ class AddAvailableSlotModal extends Component {
             start: '',
             end: '',
             role: '',
+            price: 0,
 
             dropdownFromValues: [],
             dropdownToValues: [],
@@ -33,6 +34,29 @@ class AddAvailableSlotModal extends Component {
 
     handleChange = (e, {name, value}) => {
         this.setState({[name]: value})
+
+        setTimeout(() => {
+            let price = parseInt(this.state.end.substr(0, 2)) - parseInt(this.state.start.substr(0, 2));
+
+
+            if (this.state.role === 1) {
+                price *= this.props.timeslot.stylist.stylist_price
+            } else if (this.state.role === 2) {
+                if (parseInt(this.props.timeslot.stylist.educator_price) === 0) {
+                    price *= this.props.timeslot.stylist.stylist_price
+                } else {
+                    price *= this.props.timeslot.stylist.educator_price
+                }
+            }
+
+            if (price) {
+                this.setState({price: price})
+            } else {
+                this.setState({price: 0})
+            }
+        }, 500)
+
+
     }
 
     // addSlot() {
@@ -64,7 +88,8 @@ class AddAvailableSlotModal extends Component {
             end: this.state.end,
             timeslot_id: this.props.timeslot.id,
             stylist_id: this.props.timeslot.stylist.id,
-            role: this.state.role
+            role: this.state.role,
+            price: this.state.price
         }
 
 
@@ -105,7 +130,15 @@ class AddAvailableSlotModal extends Component {
             })
         })
 
-        this.setState({dropdownRoleValues: dropdownValues.Roles})
+
+        if (parseInt(this.props.timeslot.stylist.experience_id) < 4) {
+            this.setState({dropdownRoleValues: dropdownValues.RolesStylist})
+
+        } else {
+            this.setState({dropdownRoleValues: dropdownValues.Roles})
+
+        }
+
     }
 
     componentDidMount() {
@@ -187,6 +220,23 @@ class AddAvailableSlotModal extends Component {
                                                      name='role'
                                                      onChange={this.handleChange.bind(this)} value={this.state.role}/>
 
+
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
+                        </Form.Field>
+
+                        <Form.Field>
+                            <Grid>
+                                <Grid.Row>
+                                    <Grid.Column width={6}>
+                                        <label>Price</label>
+                                    </Grid.Column>
+                                    <Grid.Column width={10}>
+                                        <Form.Input fluid placeholder='Price'
+                                                    name='price'
+                                                    onChange={this.handleChange.bind(this)} value={this.state.price}
+                                                    disabled/>
 
                                     </Grid.Column>
                                 </Grid.Row>

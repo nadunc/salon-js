@@ -35,17 +35,35 @@ const BookingModel = sequelize.define('booking', {
             }
         }
     },
-    accepted:{
+    accepted: {
         type: Sequelize.BOOLEAN,
     },
-    role:{
+    role: {
         type: Sequelize.INTEGER,
         validate: {
             notEmpty: {
                 msg: "Hiring role cannot be empty."
             }
         }
-    }
+    },
+    price: {
+        type: Sequelize.DOUBLE,
+        defaultValue: 0,
+        validate: {
+            isNumeric: {
+                msg: 'Price can only be numbers.'
+            },
+            min: 0
+        }
+    },
+    feedback: {
+        type: Sequelize.STRING,
+    },
+    rating: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+
+    },
 }, {
     underscored: true,
 });

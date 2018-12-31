@@ -23,6 +23,7 @@ class SearchBox extends Component {
             price: 'lth',
             rating: '0',
             experience: '0',
+            role: 1,
             dropdownValuesExperiences: []
 
         }
@@ -47,6 +48,7 @@ class SearchBox extends Component {
             price: this.state.price,
             rating: this.state.rating,
             experience: this.state.experience,
+            role: this.state.role,
         })
     }
 
@@ -121,12 +123,16 @@ class SearchBox extends Component {
                                  onChange={this.handleChange.bind(this)}/>
                     <Form.Select fluid label='Price' options={dropdownValues.Prices} placeholder='Price'
                                  defaultValue="lth" name='price' onChange={this.handleChange.bind(this)}/>
-                    <Form.Select fluid label='Rating' options={dropdownValues.Ratings} placeholder='Rating'
-                                 defaultValue="0" name='rating' onChange={this.handleChange.bind(this)}/>
+                    {/*<Form.Select fluid label='Rating' options={dropdownValues.Ratings} placeholder='Rating'*/}
+                                 {/*defaultValue="0" name='rating' onChange={this.handleChange.bind(this)}/>*/}
 
-                    <Form.Select fluid label='Experience' options={this.state.dropdownValuesExperiences}
-                                 placeholder='Experience'
-                                 defaultValue="0" name='experience' onChange={this.handleChange.bind(this)}/>
+                    {/*<Form.Select fluid label='Experience' options={this.state.dropdownValuesExperiences}*/}
+                                 {/*placeholder='Experience'*/}
+                                 {/*defaultValue="0" name='experience' onChange={this.handleChange.bind(this)}/>*/}
+
+                    <Form.Select fluid label='Role' options={dropdownValues.Roles}
+                                 placeholder='Role'
+                                 defaultValue="1" name='role' onChange={this.handleChange.bind(this)}/>
 
                     <Form.Button color="green" fluid size='large' className="search-btn"
                                  onClick={this.search.bind(this)}>

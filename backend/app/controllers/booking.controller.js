@@ -27,6 +27,24 @@ exports.findBookingsByStylist = (req, res) => {
 
 };
 
+exports.findBookingsBySalon = (req, res) => {
+
+    SalonModel.findOne({where: {user_id: req.user.id}}).then((salon) => {
+
+        BookingModel.findAll({
+            where: {salon_id: salon.id, accepted: true},
+            include: [SalonModel, StylistModel]
+        }).then((bookings) => {
+            res.json(commonMethods.createResponse(true, bookings, responseMessages.BOOKING_LIST_RETRIEVE_SUCCESS));
+        }).catch((err) => {
+            res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+        });
+
+    }).catch((err) => {
+        res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+    })
+
+};
 
 exports.findBookingRequestsByStylist = (req, res) => {
 
@@ -58,6 +76,7 @@ exports.create = (req, res) => {
         end: temp.end,
         timeslot_id: temp.timeslot_id,
         stylist_id: temp.stylist_id,
+        price: temp.price,
         role: temp.role, // 1=>stylist, 2=>educator
     };
 
@@ -156,6 +175,7 @@ exports.accept = (req, res) => {
 
 
 };
+
 
 
 

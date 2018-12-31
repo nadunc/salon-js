@@ -7,6 +7,7 @@ var TimeSlotRoutes = require('./timeslot.routes');
 var ExperienceRoutes = require('./experience.routes');
 var BookingRoutes = require('./booking.routes');
 var NotificationsRoutes = require('./notification.routes');
+var FeedbackRoutes = require('./feedback.routes');
 
 var router = express.Router();
 
@@ -19,6 +20,7 @@ router.use('/timeslots', TimeSlotRoutes);
 router.use('/experiences', ExperienceRoutes);
 router.use('/bookings', BookingRoutes);
 router.use('/notifications', NotificationsRoutes);
+router.use('/feedbacks', FeedbackRoutes);
 
 
 module.exports = router;

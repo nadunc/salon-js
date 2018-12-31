@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Button, Card, Image, Grid, Statistic, Icon} from "semantic-ui-react";
 
-class Review extends Component {
+class Feedback extends Component {
     state = {}
 
     constructor(props) {
@@ -9,6 +9,14 @@ class Review extends Component {
     }
 
     render() {
+
+        let feedback = this.props.feedback
+
+        let stars = []
+        for (let i = 1; i <= feedback.rating; i++) {
+            stars.push(<Icon name='star' color="yellow" key={i}/>)
+        }
+
 
         return (
             <Card fluid>
@@ -18,14 +26,12 @@ class Review extends Component {
                         <Grid.Row>
                             <Grid.Column width={2} className="text-center">
                                 <Image src='/images/salon_placeholder.png'/>
-                                    <p className="review-salon-name">Salon ABC</p>
+                                <p className="review-salon-name">Salon ABC</p>
                             </Grid.Column>
                             <Grid.Column width={14}>
                                 <Card.Description>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
-                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
-                                        Proin sodales pulvinar sic tempor.
+                                        {feedback.feedback}
                                     </p>
 
                                     {/*<p className="stylist-card-rating">*/}
@@ -38,11 +44,7 @@ class Review extends Component {
                                             <Grid.Column width={12}>
                                                 <Statistic size="mini" className='stylist-card-rating'>
                                                     <Statistic.Value>
-                                                        <Icon name='star' color="yellow"/>
-                                                        <Icon name='star' color="yellow"/>
-                                                        <Icon name='star' color="yellow"/>
-                                                        <Icon name='star' color="yellow"/>
-                                                        <Icon name='star' color="yellow"/>
+                                                        {stars}
                                                     </Statistic.Value>
                                                     {/*<Statistic.Label>Average Rating</Statistic.Label>*/}
                                                 </Statistic>
@@ -64,4 +66,4 @@ class Review extends Component {
     };
 }
 
-export default Review;
+export default Feedback;

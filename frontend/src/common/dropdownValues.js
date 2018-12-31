@@ -70,11 +70,15 @@ const Roles = [
     {key: 'stylist', text: 'Stylist', value: '1'},
     {key: 'educator', text: 'Educator', value: '2'}
 ]
+const RolesStylist = [
+    {key: 'stylist', text: 'Stylist', value: '1'}
+]
 
 export default {
     FromTimes,
     ToTimes,
     Prices,
     Ratings,
-    Roles
+    Roles,
+    RolesStylist
 }

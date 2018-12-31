@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
 import {Button, Container, Icon, Image, Segment, Grid, Statistic, Divider, Message} from 'semantic-ui-react'
 import MainMenu from '../components/MainMenu';
-import Review from '../components/Review';
+import Feedback from '../components/Feedback';
 import Loader from '../components/Loader';
 import axios from "axios";
 import {COMMON_ERROR_MESSAGE, SERVER_ROUTES} from "../common/commonVarList";
 import * as commonMethods from "../common/commonMethods";
 import {Modal} from "semantic-ui-react/dist/commonjs/modules/Modal";
 import Footer from "../components/Footer";
+import {List} from "semantic-ui-react/dist/commonjs/elements/List";
+import moment from "moment";
 
 
 class StylistPortfolioLayout extends Component {
@@ -19,7 +21,9 @@ class StylistPortfolioLayout extends Component {
             message: '',
             isMessageVisible: false,
             isLoading: true,
-            isLoaded: false
+            isLoaded: false,
+            feedbacks:[],
+            rating: 0
         }
     }
 
@@ -44,6 +48,29 @@ class StylistPortfolioLayout extends Component {
             this.setState({isLoading: false})
             this.setMessage(true, false, COMMON_ERROR_MESSAGE);
         })
+
+
+        axios.get(SERVER_ROUTES.GET_FEEDBACKS_BY_STYLIST + '/' + stylistId,).then((res) => {
+            if (res.data.success) {
+                this.setState({feedbacks: res.data.data})
+            } else {
+                this.setMessage(true, false, COMMON_ERROR_MESSAGE);
+            }
+        }).catch((err) => {
+            this.setMessage(true, false, COMMON_ERROR_MESSAGE);
+        })
+
+        axios.get(SERVER_ROUTES.GET_RATING_BY_STYLIST.replace(':id', stylistId)).then((res) => {
+            if (res.data.success) {
+                this.setState({rating: res.data.data[0].rating})
+            } else {
+                this.setMessage(true, false, COMMON_ERROR_MESSAGE);
+            }
+        }).catch((err) => {
+            this.setMessage(true, false, COMMON_ERROR_MESSAGE);
+        })
+
+
     }
 
     setMessage(visible, success, content) {
@@ -119,7 +146,7 @@ class StylistPortfolioLayout extends Component {
                             <Grid.Column width={2} className="text-center">
                                 <Statistic size="tiny" className='stylist-card-rating'>
                                     <Statistic.Value>
-                                        <span>4.8 </span>
+                                        <span>{Math.round( this.state.rating * 10 ) / 10}</span>
                                         <Icon name='star' color="yellow"/>
                                     </Statistic.Value>
                                     {/*<Statistic.Label>Average Rating</Statistic.Label>*/}
@@ -147,11 +174,13 @@ class StylistPortfolioLayout extends Component {
                         <h3>Reviews</h3>
 
 
-                        <Review/>
-                        <Review/>
-                        <Review/>
-                        <Review/>
-                        <Review/>
+                        {this.state.feedbacks.sort((a,b)=> { return b.id - a.id }).map((feedback, key) => {
+                            return (
+                                <Feedback feedback={feedback} key={key}/>
+                            )
+                        })}
+
+                        {this.state.feedbacks.length === 0 && <h4>No reviews available.</h4>}
 
 
                     </Segment>

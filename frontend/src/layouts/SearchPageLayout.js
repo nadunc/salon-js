@@ -14,7 +14,8 @@ class SearchPageLayout extends Component {
     constructor(props){
         super(props)
         this.state = {
-            timeslots: []
+            timeslots: [],
+            noStylists : false
             // stylists: [
             //     {firstname: 'XXXXXX', lastname: 'YYYYYYYYYY', work_as_stylist:true, work_as_educator:true, bio: ''},
             //
@@ -49,6 +50,7 @@ class SearchPageLayout extends Component {
     }
 
     search(data) {
+        this.setState({noStylists:false})
         axios.post(SERVER_ROUTES.GET_AVAILABLE_STYLISTS, data)
             .then(res => {
                 let obj = res.data;
@@ -58,10 +60,10 @@ class SearchPageLayout extends Component {
                     if (timeslots && timeslots.length > 0) {
                         this.setState({timeslots: timeslots});
                     }else{
-                        this.setState({timeslots: []});
+                        this.setState({timeslots: [], noStylists: true});
                     }
                 }else{
-                    this.setState({timeslots: []});
+                    this.setState({timeslots: [], noStylists:true});
                 }
 
             })
@@ -81,6 +83,7 @@ class SearchPageLayout extends Component {
 
                     <StylistContainer timeslots={this.state.timeslots} auth={this.props.auth}/>
 
+                    {this.state.noStylists && <h3>No results. Please try again with different parameters.</h3>}
                 </Container>
                 <Footer/>
             </div>

@@ -23,4 +23,5 @@ router.post('/salon', passport.authenticate('salon_only', {session: false}), Boo
 router.patch('/reject', passport.authenticate('stylist_only', {session: false}), BookingController.reject);
 router.patch('/accept', passport.authenticate('stylist_only', {session: false}), BookingController.accept);
 
+
 module.exports = router;

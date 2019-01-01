@@ -3,7 +3,7 @@ import {Button, Card, Image, Grid, Statistic, Icon} from "semantic-ui-react";
 import AddFeedbackModal from "./AddFeedbackModal";
 import moment from 'moment'
 
-class StylistBooking extends Component {
+class SalonBooking extends Component {
     state = {}
 
     constructor(props) {
@@ -97,4 +97,4 @@ class StylistBooking extends Component {
     };
 }
 
-export default StylistBooking;
+export default SalonBooking;

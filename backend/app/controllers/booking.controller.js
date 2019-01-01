@@ -105,11 +105,16 @@ exports.create = (req, res) => {
 
 
 exports.reject = (req, res) => {
-    BookingModel.findOne({where: {id: req.body.booking_id}}).then((booking) => {
+    BookingModel.findOne({where: {id: req.body.booking_id}, include:[StylistModel, SalonModel]}).then((booking) => {
         bookingUpdate = {
             accepted: false
         };
         booking.update(bookingUpdate).then((booking) => {
+            let notification = {
+                description: 'Your booking was rejected by ' + booking.stylist.firstname,
+                user_id: booking.salon.user_id
+            }
+            NotificationModel.create(notification);
             res.json(commonMethods.createResponse(true, booking, responseMessages.BOOKING_REJECT_SUCCESS));
         }).catch((err) => {
             res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
@@ -122,7 +127,7 @@ exports.reject = (req, res) => {
 
 exports.accept = (req, res) => {
 
-    BookingModel.findOne({where: {id: req.body.booking_id}}).then((booking) => {
+    BookingModel.findOne({where: {id: req.body.booking_id}, include:[StylistModel, SalonModel]}).then((booking) => {
 
         let date = booking.date;
         let start = booking.start;
@@ -154,6 +159,12 @@ exports.accept = (req, res) => {
                         accepted: true
                     };
                     booking.update(bookingUpdate).then((booking) => {
+                        let notification = {
+                            description: 'Your booking was accepted by ' + booking.stylist.firstname,
+                            user_id: booking.salon.user_id
+                        }
+                        NotificationModel.create(notification);
+
                         res.json(commonMethods.createResponse(true, booking, responseMessages.BOOKING_ACCEPT_SUCCESS));
                     }).catch((err) => {
                         res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));

@@ -31,7 +31,10 @@ class StylistContentCalendar extends Component {
     dateClicked(e) {
         // moment().format('YYYY-MM-DD')
         // alert('Date Clicked: ' + e.format('YYYY-MM-DD').toString());
-        this.setState({isModalVisible: true, date: e.format('YYYY-MM-DD')})
+
+        if(moment().isBefore(e.format('YYYY-MM-DD').toString())){
+            this.setState({isModalVisible: true, date: e.format('YYYY-MM-DD')})
+        }
     }
 
     closeModal() {

@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {Button, Card, Image, Grid, Statistic, Icon} from "semantic-ui-react";
-import {CLIENT_ROUTES} from "../common/commonVarList";
+import {CLIENT_ROUTES, COMMON_ERROR_MESSAGE, SERVER_ROUTES} from "../common/commonVarList";
 import AddBookingModal from "./AddBookingModal";
 import * as commonMethods from "../common/commonMethods";
+import axios from "axios/index";
 
 class StylistCard extends Component {
 
@@ -11,6 +12,7 @@ class StylistCard extends Component {
         super(props);
         this.state = {
             isModalVisible: false,
+            rating: 0
         }
 
         this.addBookingConfirmation = this.addBookingConfirmation.bind(this)
@@ -24,6 +26,24 @@ class StylistCard extends Component {
     addBookingConfirmation(){
 
     }
+
+
+    componentDidMount(){
+        let stylist = this.props.timeslot.stylist
+
+
+        axios.get(SERVER_ROUTES.GET_RATING_BY_STYLIST.replace(':id', stylist.id)).then((res) => {
+            if (res.data.success) {
+                this.setState({rating: res.data.data[0].rating})
+            }
+        }).catch((err) => {
+
+        })
+    }
+
+
+
+
 
     render() {
         let stylist = this.props.timeslot.stylist;
@@ -65,7 +85,7 @@ class StylistCard extends Component {
 
                                 <Statistic size="mini" className='stylist-card-rating'>
                                     <Statistic.Value>
-                                        <span>4.8 </span>
+                                        <span>{Math.round( this.state.rating * 10 ) / 10}</span>
                                         <Icon name='star' color="yellow" />
                                     </Statistic.Value>
                                     {/*<Statistic.Label>Average Rating</Statistic.Label>*/}

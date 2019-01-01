@@ -6,7 +6,7 @@ import {COMMON_ERROR_MESSAGE, SERVER_ROUTES} from '../common/commonVarList'
 import axios from 'axios'
 
 
-class AddAvailableSlotModal extends Component {
+class AddBookingModal extends Component {
 
     constructor(props) {
         super(props);
@@ -258,4 +258,4 @@ class AddAvailableSlotModal extends Component {
     };
 }
 
-export default AddAvailableSlotModal;
+export default AddBookingModal;

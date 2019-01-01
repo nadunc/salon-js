@@ -32,7 +32,7 @@ exports.findBookingsBySalon = (req, res) => {
     SalonModel.findOne({where: {user_id: req.user.id}}).then((salon) => {
 
         BookingModel.findAll({
-            where: {salon_id: salon.id, accepted: true},
+            where: {salon_id: salon.id},
             include: [SalonModel, StylistModel]
         }).then((bookings) => {
             res.json(commonMethods.createResponse(true, bookings, responseMessages.BOOKING_LIST_RETRIEVE_SUCCESS));

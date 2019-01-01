@@ -29,6 +29,8 @@ module.exports = {
     BOOKING_REJECT_SUCCESS : 'Booking has been rejected.',
     BOOKING_ACCEPT_SUCCESS : 'Booking has been accepted.',
 
+    FEEDBACK_ADD_SUCCESS : 'Feedback successfully added.',
+
 
     USER_PASSWORD_RESET_CODE_SENT : 'Password reset link sent. Please check you mailbox.',
     USER_NOT_FOUND : 'User not found.',

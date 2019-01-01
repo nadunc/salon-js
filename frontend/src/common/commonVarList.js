@@ -49,6 +49,7 @@ const SERVER_ROUTES = {
     ACCEPT_BOOKING: SERVER_ROOT+'/bookings/accept',
     GET_BOOKINGS_BY_STYLIST: SERVER_ROOT+'/bookings/stylist',
     GET_BOOKINGS_BY_SALON: SERVER_ROOT+'/bookings/salon',
+    ADD_FEEDBACK: SERVER_ROOT+'/feedbacks',
 
 };
 

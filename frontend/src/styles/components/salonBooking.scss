@@ -1,0 +1,54 @@
+@import "../colors";
+
+
+.salon-booking-status{
+  font-size: 16px;
+  text-align: right;
+}
+
+
+.salon-booking-price{
+  color: $color-green;
+  font-size: 23px;
+  text-align: right;
+  margin-right: 3px !important;
+}
+
+.salon-booking-date{
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.salon-booking-time{
+  font-size: 14px;
+}
+
+.salon-booking-stylist-name{
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.salon-booking-role{
+
+}
+
+
+.salon-booking-status-completed{
+  color: $color-green;
+}
+.salon-booking-status-require-feedback{
+  color: $color-yellow;
+  cursor: pointer;
+}
+.salon-booking-status-upcoming{
+  color: $color-green;
+}
+.salon-booking-status-waiting-for-stylist{
+  color: $color-blue;
+}
+.salon-booking-status-rejected{
+  color: $color-red;
+}
+.salon-booking-status-expired{
+  color: $color-grey;
+}

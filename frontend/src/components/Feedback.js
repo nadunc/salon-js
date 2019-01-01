@@ -50,7 +50,7 @@ class Feedback extends Component {
                                                 </Statistic>
                                             </Grid.Column>
                                             <Grid.Column width={4}>
-                                                <p className="text-right">2018-01-02</p>
+                                                <p className="text-right">{feedback.date}</p>
                                             </Grid.Column>
                                         </Grid.Row>
                                     </Grid>

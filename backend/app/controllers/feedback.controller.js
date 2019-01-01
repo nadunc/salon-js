@@ -12,7 +12,7 @@ const Op = Sequelize.Op;
 
 
 exports.findFeedbacksByStylist = (req, res) => {
-    BookingModel.findAll({where: {stylist_id: req.params.id, rating:{[Op.ne]: 0}}, attributes: ['id','feedback', 'rating']}).then((bookings) => {
+    BookingModel.findAll({where: {stylist_id: req.params.id, rating:{[Op.ne]: 0}}, attributes: ['id','feedback', 'rating', 'date']}).then((bookings) => {
             res.json(commonMethods.createResponse(true, bookings, responseMessages.FEEDBACK_LIST_RETRIEVE_SUCCESS));
     }).catch((err) => {
         res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
@@ -37,3 +37,24 @@ exports.findAverageRatingByStylist = (req, res) => {
     })
 };
 
+
+
+exports.addFeedback = (req, res) => {
+    let temp = req.body;
+
+    let feeback = {
+        rating: temp.rating,
+        feedback: temp.review
+    };
+
+    BookingModel.findOne({where: {id: req.params.id}}).then((booking) => {
+        booking.update(feeback).then((booking) => {
+            res.json(commonMethods.createResponse(true, booking, responseMessages.FEEDBACK_ADD_SUCCESS));
+        }).catch((err) => {
+            res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+        });
+    }).catch((err) => {
+        res.json(commonMethods.createResponse(false, null, commonMethods.getSequelizeErrorMessage(err)));
+    })
+
+};

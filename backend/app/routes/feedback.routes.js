@@ -19,4 +19,6 @@ var router = express.Router();
 router.get('/:id', FeedbackController.findFeedbacksByStylist);
 router.get('/:id/rating', FeedbackController.findAverageRatingByStylist);
 
+router.post('/:id',  passport.authenticate('salon_only', {session: false}), FeedbackController.addFeedback);
+
 module.exports = router;

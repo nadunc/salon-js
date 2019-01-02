@@ -58,6 +58,15 @@ class SearchPageLayout extends Component {
                 if (obj.success) {
                     let timeslots = obj.data;
                     if (timeslots && timeslots.length > 0) {
+
+                        if(data.price === 'htl'){
+                            if(data.role ===1){
+                                this.setState({timeslots: timeslots.sort((a,b)=> { return b.stylist.stylist_price - a.stylist.stylist_price })});
+                            }else{
+                                this.setState({timeslots: timeslots.sort((a,b)=> { return b.stylist.educator_price - a.stylist.educator_price })});
+                            }
+                        }
+
                         this.setState({timeslots: timeslots});
                     }else{
                         this.setState({timeslots: [], noStylists: true});

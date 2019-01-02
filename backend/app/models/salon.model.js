@@ -68,4 +68,6 @@ SalonModel.belongsTo(UserModel);
 //
 //
 
+// SalonModel.sync()
+
 module.exports = SalonModel;

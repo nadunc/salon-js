@@ -85,5 +85,5 @@ StylistModel.belongsTo(ExperienceModel);
 //     // });
 // });
 
-
+// StylistModel.sync()
 module.exports = StylistModel;

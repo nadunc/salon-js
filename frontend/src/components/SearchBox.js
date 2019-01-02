@@ -24,13 +24,40 @@ class SearchBox extends Component {
             rating: '0',
             experience: '0',
             role: 1,
-            dropdownValuesExperiences: []
+            dropdownValuesExperiences: [],
+            dropdownValuesToTimes: dropdownValues.ToTimes
 
         }
     }
 
 
     handleChange = (e, {name, value}) => {
+        if(name === 'start'){
+            this.setState({dropdownValuesToTimes: dropdownValues.ToTimes})
+
+            let start = parseInt(value.substr(0, 2))
+
+            let dropdownToValuesClone = JSON.parse(JSON.stringify( dropdownValues.ToTimes ));
+
+            // let dropdownToValues = dropdownToValuesClone.map((to, i)=>{
+            //     if(parseInt(to.value.substr(0, 2)) <= start && parseInt(to.value.substr(0, 2))!==0){
+            //         to.disabled = true
+            //     }
+            //     return to;
+            // })
+
+
+            this.setState({dropdownValuesToTimes: dropdownToValuesClone.map((to, i)=>{
+                    if(parseInt(to.value.substr(0, 2)) <= start && parseInt(to.value.substr(0, 2))!==0){
+                        to.disabled = true
+                    }
+                    return to;
+                })})
+            console.log(dropdownToValuesClone)
+            console.log(dropdownValues.ToTimes)
+        }
+
+
         this.setState({[name]: value})
     }
 
@@ -53,6 +80,8 @@ class SearchBox extends Component {
     }
 
     componentDidMount() {
+
+
         // axios.get(SERVER_ROUTES.ROOT + SERVER_ROUTES.GET_EXPERIENCES)
         //     .then(res => {
         //         let obj = res.data;
@@ -119,7 +148,7 @@ class SearchBox extends Component {
                     {/*<Form.Select fluid label='To' options={toTimes} placeholder='To' icon='clock' iconPosition='left'/>*/}
                     <Form.Select fluid label='From' options={dropdownValues.FromTimes} placeholder='From' name='start'
                                  onChange={this.handleChange.bind(this)}/>
-                    <Form.Select fluid label='To' options={dropdownValues.ToTimes} placeholder='To' name='end'
+                    <Form.Select fluid label='To' options={this.state.dropdownValuesToTimes} placeholder='To' name='end'
                                  onChange={this.handleChange.bind(this)}/>
                     <Form.Select fluid label='Price' options={dropdownValues.Prices} placeholder='Price'
                                  defaultValue="lth" name='price' onChange={this.handleChange.bind(this)}/>

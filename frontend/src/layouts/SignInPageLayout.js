@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import MainMenu from '../components/MainMenu';
-import {Container, Form, Checkbox, Button, Card, Grid} from 'semantic-ui-react'
+import {Container, Checkbox, Button, Card, Grid, Message, Label} from 'semantic-ui-react'
+import {Form} from 'formsy-semantic-ui-react'
 import axios from 'axios'
 
 
@@ -10,6 +11,7 @@ import connect from "react-redux/es/connect/connect";
 import * as userActions from "../actions/authActions";
 import {AuthenticationTypes} from "../types/index";
 import Footer from "../components/Footer";
+import {Modal} from "semantic-ui-react/dist/commonjs/modules/Modal";
 
 
 class SignInPageLayout extends Component {
@@ -17,9 +19,11 @@ class SignInPageLayout extends Component {
     constructor(props) {
         super(props)
 
-        // this.state = {
-        //     isAuthenticated: false
-        // }
+        this.state = {
+            message: '',
+            isMessageVisible: false,
+            // isAuthenticated: false
+        }
     }
 
     login() {
@@ -39,15 +43,27 @@ class SignInPageLayout extends Component {
         }
 
         if (nextProps.action === AuthenticationTypes.SIGIN_IN_FAILED) {
-            alert(nextProps.message)
+            // alert(nextProps.message)
+            this.setMessage(true, false, 'Invalid email or password')
         }
     }
 
+    setMessage(visible, success, content) {
+        let message = <Message success={success} error={!success} header={success ? 'Success' : 'Error'}
+                               content={content} className='form-submit-success-message'/>;
+        this.setState({message: message, isMessageVisible: visible})
+    }
 
     render() {
         if (this.props.auth.isAuth) {
             return (<Redirect to={CLIENT_ROUTES.DASHBOARD}/>);
         }
+
+        let message = this.state.message;
+        let isMessageVisible = this.state.isMessageVisible;
+
+        const errorLabel = <Label color="red" pointing/>
+
         return (
             <div>
                 <MainMenu/>
@@ -56,10 +72,13 @@ class SignInPageLayout extends Component {
 
                     <h1 className='text-center page-h1'>Sign In</h1>
 
+
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={5}/>
                             <Grid.Column width={6}>
+                                {isMessageVisible && message}
+
                                 <Card fluid>
                                     <Card.Content>
 
@@ -67,11 +86,11 @@ class SignInPageLayout extends Component {
                                             <Form>
                                                 <Form.Field>
                                                     <label>Email</label>
-                                                    <input ref="email" placeholder='Email' type="email"/>
+                                                    <input ref="email" placeholder='Email' type="email" required/>
                                                 </Form.Field>
                                                 <Form.Field>
                                                     <label>Password</label>
-                                                    <input ref="password" placeholder='Password' type="password"/>
+                                                    <input ref="password" placeholder='Password' type="password" required/>
                                                 </Form.Field>
                                                 <Form.Field>
                                                     <Checkbox ref="keep_sign_in" label='Keep me signed in'/>

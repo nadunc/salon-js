@@ -65,10 +65,11 @@ class StylistContentDashboard extends Component {
         for (let i = 0; i < this.state.bookings.length; i++) {
 
             let booking = this.state.bookings[i]
-
             // completed
             if (moment(booking.date + ' ' + booking.end).isBefore(moment()) && (parseInt(booking.rating) > 0)) {
                 completedBookingCount++
+                totalEarnings +=  booking.price
+
             }
 
             // upcoming
@@ -81,7 +82,6 @@ class StylistContentDashboard extends Component {
                 waitingBookingCount++
             }
 
-            totalEarnings +=  booking.price
         }
 
 

@@ -39,15 +39,22 @@ class AddBookingModal extends Component {
             let price = parseInt(this.state.end.substr(0, 2)) - parseInt(this.state.start.substr(0, 2));
 
 
-            if (this.state.role === 1) {
+            if (parseInt(this.state.role) === 1) {
                 price *= this.props.timeslot.stylist.stylist_price
-            } else if (this.state.role === 2) {
+                console.log('price1', price)
+            } else if (parseInt(this.state.role) === 2) {
                 if (parseInt(this.props.timeslot.stylist.educator_price) === 0) {
                     price *= this.props.timeslot.stylist.stylist_price
+                    console.log('price2', price)
+
                 } else {
                     price *= this.props.timeslot.stylist.educator_price
+                    console.log('price3', price)
+
                 }
             }
+
+            console.log('price4', price)
 
             if (price) {
                 this.setState({price: price})
@@ -58,25 +65,6 @@ class AddBookingModal extends Component {
 
 
     }
-
-    // addSlot() {
-    //     let user = this.props.auth.user
-    //
-    //     let timeslot = {
-    //         date: this.props.date,
-    //         start: this.state.start,
-    //         end: this.state.end,
-    //         token: user.token,
-    //         stylist_id: user.stylist.id
-    //     }
-    //
-    //     axios.post(SERVER_ROUTES.ADD_TIMESLOT, timeslot).then((res) => {
-    //         this.setMessage(true, res.data.success, res.data.message);
-    //         this.props.addSlotConfirmation(true);
-    //     }).catch((err) => {
-    //         this.setMessage(true, false, COMMON_ERROR_MESSAGE);
-    //     })
-    // }
 
 
     addBooking() {

@@ -5,7 +5,7 @@ const sequelize = new Sequelize('salon_js', 'root', '', {
     port: 3306,
     dialect: 'mysql',
     operatorsAliases: false,
-    // logging: false,
+    logging: false,
     // sync: { force: true },
 });
 
